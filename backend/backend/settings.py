@@ -102,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-AUTH_USER_MODEL = "api.User" 
+AUTH_USER_MODEL = "api.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -131,8 +131,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000', 'http://localhost:8000']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://localhost:8000/']
 CORS_ALLOW_HEADERS = (
     'csrftoken',
     'content-type',
