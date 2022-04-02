@@ -1,7 +1,6 @@
 from datetime import datetime
 from genericpath import exists
 import json
-from attr import fields
 from cv2 import log
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
