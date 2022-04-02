@@ -2,13 +2,14 @@ import { useState } from "react";
 import axios from 'axios';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
-//import '../styles/Login.css'
-function Login() {
+import '../styles/LoginForm.css'
+
+
+function LoginForm() {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [ErrorMessage, setErrorMessage] = useState("")
-    const [email, setEmail] = useState("");
 
     async function sendLoginData(e){
         e.preventDefault();
@@ -36,16 +37,13 @@ function Login() {
     }
 
     return (
-      <div className='login'>
-        <form onSubmit={(e) => sendLoginData(e)}>
+        <form className="login-form" onSubmit={(e) => sendLoginData(e)}>
             <input type='text' value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)}></input>
             <input type='password' value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}></input>
-            {/* <input type='email' value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)}></input> */}
+            <button>Login</button>
             {ErrorMessage}
-            <button>submit</button>
         </form>
-      </div>
     );
 }
 
-export default Login;
+export default LoginForm;

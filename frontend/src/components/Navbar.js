@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import Login from './Login';
+import AuthenticationButtons from './AuthenticationButtons';
 import Logout from './Logout';
 import '../styles/Navbar.css'
+import LoginForm from './LoginForm';
 
 
 function Navbar() {
@@ -11,14 +12,18 @@ function Navbar() {
         const loggedInUser = localStorage.getItem('user');
         if (loggedInUser){
             setUser(JSON.parse(loggedInUser))
-            console.log(user)
         }
       }, []);
 
     return (
       <nav className='navbar'>
-          {user ? <Logout /> : <Login />}
-          
+        <div className='left-nav'>
+          <button></button>
+        </div>
+        <div className='right-nav'>
+          {user ? <Logout /> : <AuthenticationButtons />}
+          <img className='avatar' src={user.avatar}/>
+        </div>
       </nav>
     );
 }

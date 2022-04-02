@@ -9,12 +9,11 @@ urlpatterns = [
     
     path('login/', views.login, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('signup/', views.create_user, name='create_user'),
 
 
     path('users/', views.users, name='users'),
-    path('user/create/', views.create_user, name='create_user'),
     path('user/<str:username>/', views.get_user, name='get_user'),
-    
     path('test-auth/', views.CheckAuth.as_view(), name='Test-Auth'), 
 
 ]
