@@ -8,13 +8,14 @@ import MessageBox from "../components/MessageBox";
 function MessageRoom() {
 
     const {username} = useParams()
-    const [receiver, setReceiver] = useState({})
+    const [receiver, setReceiver] = useState()
     const [messages, setMessages] = useState()
 
 
     useEffect(() => {
         axios.get('/api/users/'+username+'/')
         .then(res => setReceiver(res.data))
+
       
         axios.get('/api/messages/'+username+'/')
         .then(res => setMessages(res.data))
@@ -25,8 +26,8 @@ function MessageRoom() {
       return (
         <div style={{"height": "80%"}}>
           <Navbar />
-             <MessageBox messages={messages} receiver={receiver}/>
-
+            {receiver ? <MessageBox messages={messages} receiver={receiver}/> : 'user not found'}
+             
         </div>
       );
     }

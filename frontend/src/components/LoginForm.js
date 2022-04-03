@@ -25,7 +25,7 @@ function LoginForm() {
             'X-CSRFTOKEN': Cookies.get('csrftoken'),
             }
         }
-        await axios.post('api/login/', body, config)
+        await axios.post('/api/login/', body, config)
         .then(res => {
             const user = res.data;
             localStorage.setItem("user", JSON.stringify(user))

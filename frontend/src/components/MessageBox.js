@@ -1,28 +1,56 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState, useRef} from 'react';
 import '../styles/MessageBox.css'
 import Messages from './Messages';
 import Cookies from 'js-cookie';
+import { useParams } from 'react-router';
+
 
 function MessageBox(props) {
+      const {username} = useParams()
       const [typedMessage, setTypedMessage] = useState('')
+      const chatSocket =  useRef(null)
 
+
+    useEffect(() => {
+      connect()
+    },[username]);
+      
+    function connect(){
+      
+      let socketPath = 'ws://127.0.0.1:8000/chat/'+username+'/'
+      chatSocket.current =  new WebSocket(socketPath)
+
+      chatSocket.current.onmessage = (event) =>{
+        let data = JSON.parse(event.data)
+        console.log(data)
+      }
+
+      chatSocket.current.onclose= (event) =>{
+          console.log(event);
+          setTimeout(connect,5000);
+      }
+    }
+    
       async function sendMessage(){
-        let body = {
-          message: typedMessage
-        }
-        let config = {
-          withCredentials: true,
-          headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFTOKEN': Cookies.get('csrftoken'),
-          }
-        }
-        await axios.post('/api/send_message/'+props.receiver.username+'/', body, config)
-        .then(res => {
-          console.log(res)
-        })
+        if (chatSocket)
+        chatSocket.current.send(JSON.stringify({
+          'message': typedMessage}));
+
+      //  let config = {
+      //    withCredentials: true,
+      //    headers: {
+      //    'Content-Type': 'application/json',
+      //    'X-CSRFTOKEN': Cookies.get('csrftoken'),
+      //    }
+      //  }
+      //  await axios.post('/api/send_message/'+props.receiver.username+'/', body, config)
+      //  .then(res => {
+      //    console.log(res)
+      //  })
       };
+
+   
 
       return (
         <div id='message-box'>
