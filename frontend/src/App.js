@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import './styles/App.css';
 import HomePage from './pages/HomePage';
 import Profile from './pages/Profile';
+import MessageRoom from './pages/MessageRoom';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/messages/:username" element={<MessageRoom />} />
         </Routes>
       </BrowserRouter>
     </div>

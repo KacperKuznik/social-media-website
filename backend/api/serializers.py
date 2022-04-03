@@ -20,3 +20,8 @@ class UserSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         photo_url = obj.fingerprint.url
         return request.build_absolute_uri(photo_url)
+
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = '__all__'

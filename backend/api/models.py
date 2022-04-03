@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, UserManager
 
 
-
 # Create your models here.
 
 
@@ -14,10 +13,9 @@ class User(AbstractUser):
     #objects = UserManager()
 
 
-
-#class Message(models.Model):
-#    message = models.CharField(max_length=250)
-#    sender = models.CharField(max_length=150)
-#    receiver = models.ForeignKey("app.Model", verbose_name=_("receiver"), on_delete=models.CASCADE)
-#    seen = models.BooleanField(default=False)
-#    time = models.TimeField(auto_now_add=True)
+class Message(models.Model):
+    message = models.CharField(max_length=250)
+    sender = models.ForeignKey(User, related_name='sender',on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, related_name='receiver',  on_delete=models.CASCADE)
+    seen = models.BooleanField(default=False)
+    time = models.DateTimeField(auto_now_add=True)

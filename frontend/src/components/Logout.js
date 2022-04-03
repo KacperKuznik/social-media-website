@@ -5,7 +5,7 @@ function Logout() {
     const navigate = useNavigate();
 
     async function handleLogout(){
-        await axios.get('api/logout/');
+        await axios.get('/api/logout/');
         localStorage.removeItem("user");
         navigate('/');
     }

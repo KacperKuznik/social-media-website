@@ -1,10 +1,11 @@
 from datetime import datetime
+from email import message
 from genericpath import exists
 import json
 from cv2 import log
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from django.views import generic
 from django.core import serializers
 from django.contrib.auth import authenticate, login as auth_login, logout
@@ -17,6 +18,8 @@ from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 from django.middleware.csrf import get_token
+from rest_framework.decorators import api_view
+from django.db.models import Q
 
 # Create your views here.
 
@@ -50,7 +53,6 @@ def create_user(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         serializer = CreateUserSerializer(data=data)
-        print(0)
         if serializer.is_valid():
 
             username = serializer.data.get('username')
@@ -94,3 +96,32 @@ def logout_view(request):
 
     logout(request)
     return HttpResponse(status=204)
+
+
+def get_messages(request, receiver):
+    receiver = get_object_or_404(User, username=receiver)
+    messages = get_list_or_404(Message, Q(
+        sender=receiver, receiver=request.user) | Q(sender=request.user, receiver=receiver))
+    messages.sort(key=lambda message: message.time)
+    serialized_messages = MessageSerializer(messages, many=True).data
+
+    return JsonResponse(serialized_messages, safe=False)
+
+
+def send_message(request, receiver):
+    receiver = get_object_or_404(User, username=receiver)
+
+    data = json.loads(request.body)
+    data['receiver'] = receiver.id
+    data['sender'] = request.user.id
+
+    serializer = MessageSerializer(data=data)
+    if serializer.is_valid():
+        message = serializer.data.get('message')
+        receiver_id = serializer.data.get('receiver')
+        sender_id = serializer.data.get('sender')
+
+        Message.objects.create(
+            message=message, receiver_id=receiver_id, sender_id=sender_id)
+        return HttpResponse(status=201)
+    return HttpResponse(status=400)
