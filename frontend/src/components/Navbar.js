@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import AuthenticationButtons from './AuthenticationButtons';
 import Logout from './Logout';
 import '../styles/Navbar.css'
-import LoginForm from './LoginForm';
+
 
 
 function Navbar() {
@@ -18,7 +18,8 @@ function Navbar() {
     return (
       <nav className='navbar'>
         <div className='left-nav'>
-          <button></button>
+          <a href='/profile'>profile</a>
+          <a href='/messages'>messages</a>
         </div>
         <div className='right-nav'>
           {user ? <Logout /> : <AuthenticationButtons />}

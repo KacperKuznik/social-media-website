@@ -1,0 +1,8 @@
+.display-profile{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: beige;
+    width: fit-content;
+    margin: 0 auto;
+}

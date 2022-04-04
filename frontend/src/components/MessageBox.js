@@ -13,7 +13,7 @@ function MessageBox(props) {
 
 
     useEffect(() => {
-      connect()
+      connect();
     },[username]);
       
     function connect(){
