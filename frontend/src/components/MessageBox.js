@@ -7,36 +7,41 @@ import { useParams } from 'react-router';
 
 
 function MessageBox(props) {
-      const {username} = useParams()
-      const [typedMessage, setTypedMessage] = useState('')
-      const chatSocket =  useRef(null)
-
+    const [messages, setMessages] = useState()
+    const {username} = useParams()
+    const [typedMessage, setTypedMessage] = useState('')
+    const chatSocket =  useRef(null)
+      
 
     useEffect(() => {
-      connect();
-    },[username]);
+      setMessages(props.messages);
+      connect()
+  }, [props])
+
+  useEffect(() => {
+    chatSocket.current.onmessage = (event) =>{
+      let data = JSON.parse(event.data)
+      console.log(data)
+      setMessages([data])
+      console.log(messages)
+      setMessages([...messages, data])
+    }
+    chatSocket.current.onclose= (event) =>{
+        console.log(event);
+        setTimeout(connect,5000);
+    }
+}, [messages])
       
     function connect(){
-      
       let socketPath = 'ws://127.0.0.1:8000/chat/'+username+'/'
       chatSocket.current =  new WebSocket(socketPath)
-
-      chatSocket.current.onmessage = (event) =>{
-        let data = JSON.parse(event.data)
-        console.log(data)
-      }
-
-      chatSocket.current.onclose= (event) =>{
-          console.log(event);
-          setTimeout(connect,5000);
-      }
     }
     
       async function sendMessage(){
         if (chatSocket)
         chatSocket.current.send(JSON.stringify({
           'message': typedMessage}));
-
+          
       //  let config = {
       //    withCredentials: true,
       //    headers: {
@@ -51,12 +56,11 @@ function MessageBox(props) {
       };
 
    
-
       return (
         <div id='message-box'>
 
-          {props.messages ?  <div>
-            {props.messages.map(message => <div key={message.id}>
+          {messages ?  <div>
+            {messages.map(message => <div key={message.id}>
               <Messages message={message.message} isreceiver={props.receiver.id === message.sender}/>
             </div>)}
           </div> :  null}

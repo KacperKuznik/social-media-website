@@ -19,3 +19,5 @@ class Message(models.Model):
     receiver = models.ForeignKey(User, related_name='receiver',  on_delete=models.CASCADE)
     seen = models.BooleanField(default=False)
     time = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.message
