@@ -7,7 +7,7 @@ import { useParams } from 'react-router';
 
 
 function MessageBox(props) {
-    const [messages, setMessages] = useState(props.messages)
+    const [messages, setMessages] = useState()
     const {username} = useParams()
     const [typedMessage, setTypedMessage] = useState('')
     const chatSocket =  useRef(null)
@@ -17,24 +17,24 @@ function MessageBox(props) {
       setMessages(props.messages);
       connect()
   }, [props])
+
+  useEffect(() => {
+    chatSocket.current.onmessage = (event) =>{
+      let data = JSON.parse(event.data)
+      console.log(data)
+      setMessages([data])
+      console.log(messages)
+      setMessages([...messages, data])
+    }
+    chatSocket.current.onclose= (event) =>{
+        console.log(event);
+        setTimeout(connect,5000);
+    }
+}, [messages])
       
     function connect(){
-      console.log(messages)
       let socketPath = 'ws://127.0.0.1:8000/chat/'+username+'/'
       chatSocket.current =  new WebSocket(socketPath)
-
-      chatSocket.current.onmessage = (event) =>{
-        let data = JSON.parse(event.data)
-        console.log(data)
-        setMessages([data])
-        console.log(messages)
-        //setMessages([...messages, data])
-      }
-
-      chatSocket.current.onclose= (event) =>{
-          console.log(event);
-          setTimeout(connect,5000);
-      }
     }
     
       async function sendMessage(){
