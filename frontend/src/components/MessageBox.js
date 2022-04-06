@@ -7,11 +7,10 @@ import { useParams } from 'react-router';
 
 
 function MessageBox(props) {
-    const [messages, setMessages] = useState()
+    const [messages, setMessages] = useState(props.messages)
     const {username} = useParams()
     const [typedMessage, setTypedMessage] = useState('')
     const chatSocket =  useRef(null)
-
       
 
     useEffect(() => {
@@ -20,12 +19,14 @@ function MessageBox(props) {
   }, [props])
       
     function connect(){
-
+      console.log(messages)
       let socketPath = 'ws://127.0.0.1:8000/chat/'+username+'/'
       chatSocket.current =  new WebSocket(socketPath)
 
       chatSocket.current.onmessage = (event) =>{
         let data = JSON.parse(event.data)
+        console.log(data)
+        setMessages([data])
         console.log(messages)
         //setMessages([...messages, data])
       }
@@ -55,7 +56,6 @@ function MessageBox(props) {
       };
 
    
-    console.log(messages)
       return (
         <div id='message-box'>
 
