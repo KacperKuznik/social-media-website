@@ -57,8 +57,10 @@ function MessageBox(props) {
 
    
       return (
-        <div id='message-box'>
 
+        <div id='message-box'>
+          <input type='text' value={typedMessage} onChange={(e) => setTypedMessage(e.target.value)}></input>
+          <button onClick={sendMessage}>Send</button>
           {messages ?  <div>
             {messages.map(message => <div key={message.id}>
               <Messages message={message.message} isreceiver={props.receiver.id === message.sender}/>
@@ -66,9 +68,9 @@ function MessageBox(props) {
           </div> :  null}
             
 
-            <input type='text' value={typedMessage} onChange={(e) => setTypedMessage(e.target.value)}></input>
-            <button onClick={sendMessage}>Send</button>
+
         </div>
+        
       );
     }
 

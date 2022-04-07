@@ -11,6 +11,7 @@ from channels.generic.websocket import WebsocketConsumer
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
         self.accept()
+        self.user = self.scope['user']
 
     def receive(self, text_data):
         message_text = json.loads(text_data)['message']
@@ -23,6 +24,7 @@ class ChatConsumer(WebsocketConsumer):
         #self.send((json.dumps({message})))
 
         # receiver = get_object_or_404(User, username=receiver)
+        print(self.user)
 
         data = {"message": message_text}
         data['receiver'] = 2#receiver.id
@@ -30,15 +32,14 @@ class ChatConsumer(WebsocketConsumer):
 
         serializer = MessageSerializer(data=data)
         if serializer.is_valid():
-            print(serializer)
             message = serializer.data.get('message')
             receiver_id = serializer.data.get('receiver')
             sender_id = serializer.data.get('sender')
 
-            #messagea = Message(
-            #     message=message, receiver_id=receiver_id, sender_id=sender_id)
-            #messagea.save()
-            #serialized_messages = MessageSerializer(messagea).data
-            self.send(json.dumps({'message': "siema", 'id': 1, 'sender': 1, 'receiver': 2 }))
+            message_obj = Message(
+                 message=message, receiver_id=receiver_id, sender_id=sender_id)
+            message_obj.save()
+            serialized_message = MessageSerializer(message_obj).data
+            self.send(json.dumps(serialized_message))
 
 

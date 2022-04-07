@@ -11,6 +11,8 @@ function Profile(props) {
       {props.user.username}
       {props.user.email}
       <img src={props.user.avatar} alt="profile picture"/>
+      {props.user.friends}
+      {console.log(props.user)}
     </div>
   );
 }
