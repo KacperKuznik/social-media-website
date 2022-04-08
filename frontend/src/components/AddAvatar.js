@@ -6,18 +6,21 @@ function AddAvatar() {
     const [avatar, setAvatar] = useState(null)
     async function upload(e){
        
-        let body = {
-            avatar: avatar
-        }
-        console.log(body)
+        const data = new FormData()
+        data.append('avatar', avatar)
         let config = {
             withCredentials: true,
             headers: {
-            'Content-Type': 'application/json',
             'X-CSRFTOKEN': Cookies.get('csrftoken'),
             }
         }
-        await axios.post('/api/upload/', body, config)
+        await axios.post('/api/upload/', data, config)
+        .then(res => {
+            const user = res.data;
+            localStorage.setItem("user", JSON.stringify(user))
+            window.location.reload(false);
+        })
+        
         .catch(err =>{
             console.log(err.response);
         })

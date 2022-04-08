@@ -128,5 +128,8 @@ def send_message(request, receiver):
 
 
 def upload(request):
-    print(request.body)
-    return HttpResponse()
+    avatar = request.FILES['avatar']
+    request.user.avatar = avatar
+    request.user.save()
+    serialized_user = UserSerializer(request.user).data
+    return JsonResponse(serialized_user, status=201)
