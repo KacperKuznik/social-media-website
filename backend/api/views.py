@@ -125,3 +125,8 @@ def send_message(request, receiver):
             message=message, receiver_id=receiver_id, sender_id=sender_id)
         return HttpResponse(status=201)
     return HttpResponse(status=400)
+
+
+def upload(request):
+    print(request.body)
+    return HttpResponse()

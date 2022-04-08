@@ -13,6 +13,7 @@ urlpatterns = [
     path('users/<str:username>/', views.get_user, name='get_user'),
     path('messages/<str:receiver>/', views.get_messages, name='get_messages'),
     path('send_message/<str:receiver>/', views.send_message, name='send_messages'),
+    path('upload/', views.upload, name='upload'),
 
     path('users/', views.users, name='users'),
 
