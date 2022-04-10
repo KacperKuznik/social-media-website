@@ -30,7 +30,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/messages" element={<SearchUserRoom />} />
-          <Route path="/messages/:username" element={<MessageRoom />} />
+          <Route path="/messages/:room_id" element={<MessageRoom />} />
         </Routes>
       </BrowserRouter>
     </div>

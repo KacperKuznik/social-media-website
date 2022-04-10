@@ -98,33 +98,12 @@ def logout_view(request):
     return HttpResponse(status=204)
 
 
-def get_messages(request, receiver):
-    receiver = get_object_or_404(User, username=receiver)
-    messages = get_list_or_404(Message, Q(
-        sender=receiver, receiver=request.user) | Q(sender=request.user, receiver=receiver))
-    messages.sort(key=lambda message: message.time)
+def get_messages(request, room_id):
+    messages = get_list_or_404(Message, room=room_id)
     serialized_messages = MessageSerializer(messages, many=True).data
 
     return JsonResponse(serialized_messages, safe=False)
 
-
-def send_message(request, receiver):
-    receiver = get_object_or_404(User, username=receiver)
-
-    data = json.loads(request.body)
-    data['receiver'] = receiver.id
-    data['sender'] = request.user.id
-
-    serializer = MessageSerializer(data=data)
-    if serializer.is_valid():
-        message = serializer.data.get('message')
-        receiver_id = serializer.data.get('receiver')
-        sender_id = serializer.data.get('sender')
-
-        Message.objects.create(
-            message=message, receiver_id=receiver_id, sender_id=sender_id)
-        return HttpResponse(status=201)
-    return HttpResponse(status=400)
 
 
 def upload(request):

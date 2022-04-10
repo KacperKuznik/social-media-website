@@ -1,8 +1,5 @@
 import json
-from random import randint
-import time
-
-
+from asgiref.sync import async_to_sync
 from .models import Message
 from .serializers import MessageSerializer
 from channels.generic.websocket import WebsocketConsumer
@@ -10,36 +7,42 @@ from channels.generic.websocket import WebsocketConsumer
 
 class ChatConsumer(WebsocketConsumer):
     def connect(self):
-        self.accept()
+        
         self.user = self.scope['user']
+        self.room_id = self.scope['url_route']['kwargs']['room_id']
+        async_to_sync(self.channel_layer.group_add)("chat", self.channel_name)
+        self.accept()
+        
+
+    def disconnect(self, close_code):
+        async_to_sync(self.channel_layer.group_discard)("chat", self.channel_name)
 
     def receive(self, text_data):
+
         message_text = json.loads(text_data)['message']
 
-        #message = Message(
-         #   message=message_text, receiver_id=1, sender_id=2)
-        #message.save()
-        #print(message)
-
-        #self.send((json.dumps({message})))
-
-        # receiver = get_object_or_404(User, username=receiver)
         print(self.user)
-
         data = {"message": message_text}
-        data['receiver'] = 2#receiver.id
+        data['room'] = self.room_id
         data['sender'] = 1#request.user.id
-
+        print(data)
         serializer = MessageSerializer(data=data)
         if serializer.is_valid():
             message = serializer.data.get('message')
-            receiver_id = serializer.data.get('receiver')
+            room_id = serializer.data.get('room')
             sender_id = serializer.data.get('sender')
 
             message_obj = Message(
-                 message=message, receiver_id=receiver_id, sender_id=sender_id)
+                 message=message, room_id=room_id, sender_id=sender_id)
             message_obj.save()
             serialized_message = MessageSerializer(message_obj).data
-            self.send(json.dumps(serialized_message))
-
-
+            async_to_sync(self.channel_layer.group_send)(
+                "chat",
+                {
+                    "type": "chat.message",
+                    "data": json.dumps(serialized_message),
+                },
+            )
+            
+    def chat_message(self, event):
+        self.send(text_data=event["data"])

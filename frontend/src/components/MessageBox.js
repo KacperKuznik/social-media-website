@@ -8,7 +8,7 @@ import { useParams } from 'react-router';
 
 function MessageBox(props) {
     const [messages, setMessages] = useState()
-    const {username} = useParams()
+    const {room_id} = useParams()
     const [typedMessage, setTypedMessage] = useState('')
     const chatSocket =  useRef(null)
       
@@ -21,10 +21,10 @@ function MessageBox(props) {
   useEffect(() => {
     chatSocket.current.onmessage = (event) =>{
       let data = JSON.parse(event.data)
-      console.log(data)
-      setMessages([data])
-      console.log(messages)
-      setMessages([...messages, data])
+      if (messages != null)
+        setMessages([...messages, data])
+      else
+        setMessages(data)
     }
     chatSocket.current.onclose= (event) =>{
         console.log(event);
@@ -33,7 +33,7 @@ function MessageBox(props) {
 }, [messages])
       
     function connect(){
-      let socketPath = 'ws://127.0.0.1:8000/chat/'+username+'/'
+      let socketPath = 'ws://127.0.0.1:8000/chat/'+room_id+'/'
       chatSocket.current =  new WebSocket(socketPath)
     }
     
@@ -41,21 +41,8 @@ function MessageBox(props) {
         if (chatSocket)
         chatSocket.current.send(JSON.stringify({
           'message': typedMessage}));
-          
-      //  let config = {
-      //    withCredentials: true,
-      //    headers: {
-      //    'Content-Type': 'application/json',
-      //    'X-CSRFTOKEN': Cookies.get('csrftoken'),
-      //    }
-      //  }
-      //  await axios.post('/api/send_message/'+props.receiver.username+'/', body, config)
-      //  .then(res => {
-      //    console.log(res)
-      //  })
       };
 
-   
       return (
 
         <div id='message-box'>
@@ -63,12 +50,9 @@ function MessageBox(props) {
           <button onClick={sendMessage}>Send</button>
           {messages ?  <div>
             {messages.map(message => <div key={message.id}>
-              <Messages message={message.message} isreceiver={props.receiver.id === message.sender}/>
+              <Messages message={message.message} isSender={props.user.id === message.sender}/>
             </div>)}
           </div> :  null}
-            
-
-
         </div>
         
       );

@@ -7,33 +7,33 @@ import FriendsList from "../components/FriendsList";
 
 const chatStyles = {
       "display": "flex",
-      "flex-grow": "1",
+      "flexGrow": "1",
 
 }
 function MessageRoom() {
-
-    const {username} = useParams()
-    const [receiver, setReceiver] = useState()
+    const room = useParams()
     const [messages, setMessages] = useState()
+    const [user, setUser] = useState('')
 
-
+  useEffect(() => {
+      const loggedInUser = localStorage.getItem('user');
+      if (loggedInUser){
+          setUser(JSON.parse(loggedInUser))
+      }
+    }, []);
+  
     useEffect(() => {
-        axios.get('/api/users/'+username+'/')
-        .then(res => setReceiver(res.data))
-
-      
-        axios.get('/api/messages/'+username+'/')
-        .then(res => setMessages(res.data))
- 
-    }, [username])
+        axios.get('/api/messages/'+room.room_id+'/')
+        .then(res => setMessages(res.data)) 
+    }, [room])
     
 
       return (
-        <div style={{'display': 'flex', 'flex-direction': 'column', 'height': "100%"}}>
+        <div style={{'display': 'flex', 'flexDirection': 'column', 'height': "100%"}}>
           <Navbar />
           <main style={chatStyles}>
             <FriendsList/>
-            {receiver ? <MessageBox messages={messages} receiver={receiver}/> : 'user not found'}
+            <MessageBox messages={messages} user={user}/>
           </main>
         </div>
       );
