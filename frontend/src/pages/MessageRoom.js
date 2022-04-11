@@ -29,7 +29,7 @@ function MessageRoom() {
     
 
       return (
-        <div style={{'display': 'flex', 'flexDirection': 'column', 'height': "100%"}}>
+        <div id='msg' style={{'display': 'flex', 'flexDirection': 'column', 'height': "100%"}}>
           <Navbar />
           <main style={chatStyles}>
             <FriendsList/>
