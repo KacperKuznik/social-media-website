@@ -12,7 +12,7 @@ function Messages(props) {
               <div className={props.isSender ? 'sender-message': 'receiver-message'} onClick={() => setShowInfo(!showInfo)}>
                 {props.message}
               </div>
-              
+              {props.seen_by}
         </div>
       );
     }

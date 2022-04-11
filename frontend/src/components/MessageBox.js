@@ -24,7 +24,7 @@ function MessageBox(props) {
       if (messages != null)
         setMessages([...messages, data])
       else
-        setMessages(data)
+        setMessages([data])
     }
     chatSocket.current.onclose= (event) =>{
         console.log(event);
@@ -48,7 +48,8 @@ function MessageBox(props) {
         <div id='message-box'>
           <input type='text' value={typedMessage} onChange={(e) => setTypedMessage(e.target.value)}></input>
           <button onClick={sendMessage}>Send</button>
-          {messages ?  <div>
+          {messages ?  <div>{console.log(typeof messages)}
+          {console.log(messages)}
             {messages.map(message => <div key={message.id}>
               <Messages message={message.message} isSender={props.user.id === message.sender} time={new Date(message.time)} seen_by={message.seen_by}/>
             </div>)}

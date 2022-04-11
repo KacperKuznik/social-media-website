@@ -25,13 +25,12 @@ class ChatConsumer(WebsocketConsumer):
         data = {"message": message_text}
         data['room'] = self.room_id
         data['sender'] = 1#request.user.id
-        print(data)
+        data['seen_by'] = [data['sender']]
         serializer = MessageSerializer(data=data)
         if serializer.is_valid():
             message = serializer.data.get('message')
             room_id = serializer.data.get('room')
             sender_id = serializer.data.get('sender')
-
             message_obj = Message(
                  message=message, room_id=room_id, sender_id=sender_id)
             message_obj.save()

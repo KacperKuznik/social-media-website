@@ -2,6 +2,7 @@ from datetime import datetime
 from email import message
 from genericpath import exists
 import json
+from re import L
 from cv2 import log
 from django.forms import model_to_dict
 from django.http import HttpResponse, JsonResponse
@@ -99,7 +100,13 @@ def logout_view(request):
 
 
 def get_messages(request, room_id):
+    
     messages = get_list_or_404(Message, room=room_id)
+
+    for i in range(len(messages)):
+        if messages[i].sender != request.user:
+            messages[i].seen_by.add(request.user)
+
     serialized_messages = MessageSerializer(messages, many=True).data
 
     return JsonResponse(serialized_messages, safe=False)
