@@ -58,5 +58,4 @@ function MessageBox(props) {
         
       );
     }
-
 export default MessageBox;
