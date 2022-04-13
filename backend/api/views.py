@@ -37,67 +37,6 @@ class CheckAuth(APIView):
         return Response({'detail': 'You\'re Authenticated'})
 
 
-def users(request):
-    response = list(User.objects.values())
-    return JsonResponse(response, safe=False)
-
-
-def get_user(request, username):
-    obj = get_object_or_404(User, username=username)
-
-    serialized_user = UserSerializer(obj).data
-    return JsonResponse(serialized_user, safe=False)
-
-
-def create_user(request):
-
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        serializer = CreateUserSerializer(data=data)
-        if serializer.is_valid():
-
-            username = serializer.data.get('username')
-            password = serializer.data.get('password')
-            email = serializer.data.get('email')
-
-            User.objects.create_user(
-                username=username, password=password, email=email)
-            print('user saved')
-            user = authenticate(username=username, password=password)
-            auth_login(request, user)
-            serialized_user = UserSerializer(user).data
-            return JsonResponse(serialized_user, status=201)
-
-    return HttpResponse(status=400)
-
-
-def login(request):
-
-    if request.method == 'POST':
-        data = json.loads(request.body)
-
-        username = data.get('username')
-        password = data.get('password')
-        if username and password:
-            print(request.user)
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                print('auth')
-                auth_login(request, user)
-
-                serialized_user = UserSerializer(user).data
-                return JsonResponse(serialized_user, status=200, safe=False)
-            else:
-                print('not auth')
-                return JsonResponse({"message": "Wrong username or password"}, status=401)
-    return JsonResponse({"message": "Incorrect data"}, status=400)
-
-
-def logout_view(request):
-
-    logout(request)
-    return HttpResponse(status=204)
-
 
 def get_messages(request, room_id):
     

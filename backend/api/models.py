@@ -1,17 +1,9 @@
-from email.policy import default
-from pyexpat import model
-from pyexpat.errors import messages
 from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, UserManager
 
+from users.models import User
 # Create your models here.
 
-
-class User(AbstractUser):
-    #username = models.CharField(max_length=150, unique=True)
-    #email = models.EmailField(Required=True)
-    avatar = models.ImageField(upload_to='avatars', default='avatars/default.jpg')
-    friends = models.ManyToManyField('self')
 
 
 class Room(models.Model):

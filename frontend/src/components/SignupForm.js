@@ -26,7 +26,7 @@ function SignupForm() {
             'X-CSRFTOKEN': Cookies.get('csrftoken'),
             }
         }
-        await axios.post('api/signup/', body, config)
+        await axios.post('users/signup/', body, config)
         .then(res => {
             const user = res.data;
             localStorage.setItem("user", JSON.stringify(user))
