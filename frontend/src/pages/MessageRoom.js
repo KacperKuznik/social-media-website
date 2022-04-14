@@ -23,7 +23,7 @@ function MessageRoom() {
     }, []);
   
     useEffect(() => {
-        axios.get('/api/messages/'+room.room_id+'/')
+        axios.get('/chat/messages/'+room.room_id+'/')
         .then(res => setMessages(res.data)) 
     }, [room])
     
