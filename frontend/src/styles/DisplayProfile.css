@@ -6,3 +6,9 @@
     width: fit-content;
     margin: 0 auto;
 }
+#profile-picture{
+    overflow: hidden;
+    clip-path: circle();
+    max-height: 500px;
+    
+}

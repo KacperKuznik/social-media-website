@@ -14,7 +14,7 @@ function AddAvatar() {
             'X-CSRFTOKEN': Cookies.get('csrftoken'),
             }
         }
-        await axios.post('/users/upload/', data, config)
+        await axios.post('/users/change_avatar/', data, config)
         .then(res => {
             const user = res.data;
             localStorage.setItem("user", JSON.stringify(user))

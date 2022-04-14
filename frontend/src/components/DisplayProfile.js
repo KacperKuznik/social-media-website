@@ -10,7 +10,7 @@ function Profile(props) {
     <div className="display-profile">
       {props.user.username}
       {props.user.email}
-      <img src={props.user.avatar} alt="profile picture"/>
+      <img src={props.user.avatar} id="profile-picture" alt="profile picture"/>
       {props.user.friends}
     </div>
   );

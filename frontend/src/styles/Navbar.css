@@ -11,9 +11,14 @@
 .avatar {
     overflow: hidden;
     clip-path: circle();
-    height: 90%;
+    height: 100%;
     
     
+}
+.img-link{
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 .left-nav, .right-nav{
     height: 100%;

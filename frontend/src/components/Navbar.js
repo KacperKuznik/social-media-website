@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import AuthenticationButtons from './AuthenticationButtons';
 import Logout from './Logout';
+import {Link} from 'react-router-dom'
 import '../styles/Navbar.css'
 
 
@@ -18,12 +19,14 @@ function Navbar() {
     return (
       <nav className='navbar'>
         <div className='left-nav'>
-          <a href='/profile'>profile</a>
-          <a href='/messages'>messages</a>
+          <Link to='/profile'>profile</Link>
+          <Link to='/messages'>messages</Link>
         </div>
         <div className='right-nav'>
           {user ? <Logout /> : <AuthenticationButtons />}
-          <img className='avatar' src={user.avatar}/>
+          <Link to='/profile' className='img-link'>
+            <img className='avatar' src={user.avatar}/>
+          </Link>
         </div>
       </nav>
     );
