@@ -10,6 +10,6 @@ urlpatterns = [
     path('signup/', signup_view, name='signup'),
     # path('users/<str:username>/', views.get_user, name='get_user'),
     # path('upload/', views.upload, name='upload'),
-    # path('users/', views.users, name='users'),
+    path('get_users/', get_users, name='get_users'),
 
 ]

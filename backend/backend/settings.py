@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
+    'chat.apps.ChatConfig',
 ]
 
 MIDDLEWARE = [

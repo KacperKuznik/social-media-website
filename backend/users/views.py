@@ -57,7 +57,7 @@ def signup_view(request):
             return JsonResponse(serialized_user, status=201)
     return JsonResponse({"message": "Incorrect data"}, status=400)
 
-def users(request):
+def get_users(request):
     response = list(User.objects.values())
     return JsonResponse(response, safe=False)
 
@@ -68,6 +68,12 @@ def get_user(request, username):
     serialized_user = UserSerializer(obj).data
     return JsonResponse(serialized_user, safe=False)
 
+def change_avatar(request):
+    avatar = request.FILES['avatar']
+    request.user.avatar = avatar
+    request.user.save()
+    serialized_user = UserSerializer(request.user).data
+    return JsonResponse(serialized_user, status=201)
 
 
 
