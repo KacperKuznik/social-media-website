@@ -33,7 +33,7 @@ function MessageBox(props) {
 }, [messages])
       
     function connect(){
-      let socketPath = 'ws://127.0.0.1:8000/chat/'+room_id+'/'
+      let socketPath = 'ws://localhost:8000/chat/'+room_id+'/'
       chatSocket.current =  new WebSocket(socketPath)
     }
     

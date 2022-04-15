@@ -30,7 +30,7 @@ function SignupForm() {
         .then(res => {
             const user = res.data;
             localStorage.setItem("user", JSON.stringify(user))
-            navigate('/profile')
+            navigate('/profile/'+user.username)
         })
         .catch(err =>{
             setErrorMessage(err.response.data.message)

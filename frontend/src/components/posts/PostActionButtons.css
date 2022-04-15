@@ -1,0 +1,20 @@
+.post-action-buttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.post-action-buttons img{
+    height: 26px;
+    margin-right: 5%;
+
+}
+.post-action-buttons > span{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+.post-action-buttons > span:hover{
+    background-color: rgb(167, 167, 167);
+}

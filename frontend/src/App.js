@@ -28,7 +28,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:username" element={<Profile />} />
           <Route path="/messages" element={<SearchUserRoom />} />
           <Route path="/messages/:room_id" element={<MessageRoom />} />
         </Routes>

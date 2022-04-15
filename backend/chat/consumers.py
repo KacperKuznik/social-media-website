@@ -21,10 +21,10 @@ class ChatConsumer(WebsocketConsumer):
 
         message_text = json.loads(text_data)['message']
 
-        print(self.user)
+        print(self.scope["user"])
         data = {"message": message_text}
         data['room'] = self.room_id
-        data['sender'] = 1#request.user.id
+        data['sender'] = self.scope['user'].id
         data['seen_by'] = [data['sender']]
         serializer = MessageSerializer(data=data)
         if serializer.is_valid():

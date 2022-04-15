@@ -2,13 +2,17 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: beige;
     width: fit-content;
     margin: 0 auto;
 }
 #profile-picture{
     overflow: hidden;
     clip-path: circle();
-    max-height: 500px;
+    max-height: 250px;
     
+}
+#background-img{
+    width: 100vw;
+    height: 350px;
+    object-fit: cover;
 }

@@ -1,0 +1,11 @@
+.post{
+    width: 33%;
+    height: fit-content;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px
+}
+.post > hr{
+    width: 100%;
+    
+}
