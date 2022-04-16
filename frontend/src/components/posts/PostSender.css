@@ -1,0 +1,11 @@
+.post-sender img{
+    overflow: hidden;
+    clip-path: circle();
+    height: 70px;
+
+}
+.post-sender{
+    display: flex;
+    align-items: center;
+    margin: 0 0 30px 0;
+}

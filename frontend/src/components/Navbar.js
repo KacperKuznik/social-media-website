@@ -19,12 +19,12 @@ function Navbar() {
     return (
       <nav className='navbar'>
         <div className='left-nav'>
-          <Link to='/profile'>profile</Link>
+          <Link to={'/profile/'+user.username} >profile</Link>
           <Link to='/messages'>messages</Link>
         </div>
         <div className='right-nav'>
           {user ? <Logout /> : <AuthenticationButtons />}
-          <Link to='/profile' className='img-link'>
+          <Link to={'/profile/'+user.username} className='img-link'>
             <img className='avatar' src={user.avatar}/>
           </Link>
         </div>
