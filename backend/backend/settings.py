@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
     'chat.apps.ChatConfig',
+    'posts.apps.PostsConfig',
 ]
 
 MIDDLEWARE = [
