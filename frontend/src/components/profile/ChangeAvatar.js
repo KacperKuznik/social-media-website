@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
+import changeAvatar from '../../img/change_avatar.png'
+import './ChangeAvatar.css'
 
-function AddAvatar() {
-    const [avatar, setAvatar] = useState(null)
-    async function upload(e){
+function ChangeAvatar() {
+    
+    async function upload(avatar){
        
         const data = new FormData()
         data.append('avatar', avatar)
@@ -20,19 +22,21 @@ function AddAvatar() {
             localStorage.setItem("user", JSON.stringify(user))
             window.location.reload(false);
         })
-        
         .catch(err =>{
             console.log(err.response);
         })
     }
 
 
-    return (<div>
-      <input type='file'  accept=".png, .jpg" onChange={(e) => setAvatar(e.target.files[0])}></input>
-      <button onClick={upload}></button>
-
-      </div>
+    return (
+    <div>
+        
+        <label>
+            <img src={changeAvatar} className='change-avatar'/>
+            <input type='file' id='avatar-input' accept=".png, .jpg" onChange={(e) => upload(e.target.files[0]) }></input>
+        </label>
+    </div>
     );
 }
 
-export default AddAvatar;
+export default ChangeAvatar;

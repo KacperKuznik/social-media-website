@@ -3,19 +3,19 @@ import PostActionButtons from './PostActionButtons';
 import PostSender from './PostSender';
 
 import img from '../wp5568745-archlinux-anime-wallpapers.png'
-function Post(){
+import DeletePost from './DeletePost';
+function Post(props){
 
     return (
         <div className="post" >
-            <PostSender avatar={img} firstname={"jan"} lastname={""}/>
+            <PostSender {...props.user} />
+            <DeletePost post_id={props.post.post_id} onDelete={() => props.onDelete(props.post_id)}/>
+            {props.data}
             {/* <PostData />
             
             <PostComment /> */}
-             siema to mój piewszy post
-           
-           
             <hr></hr>
-            <PostActionButtons />
+            <PostActionButtons {...props.post}/>
         </div>
     )
 

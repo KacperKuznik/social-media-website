@@ -69,6 +69,7 @@ def get_user(request, username):
     return JsonResponse(serialized_user, safe=False)
 
 def change_avatar(request):
+    print(request.FILES)
     avatar = request.FILES['avatar']
     request.user.avatar = avatar
     request.user.save()

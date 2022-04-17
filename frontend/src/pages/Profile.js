@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar"
 import DisplayProfile from "../components/DisplayProfile"
-import AddAvatar from "../components/AddAvatar";
 
 
 function Profile() {
@@ -19,7 +18,6 @@ function Profile() {
     <div>
       <Navbar />
       <DisplayProfile user={user} />
-      <AddAvatar />
       
     </div>
   );

@@ -34,19 +34,19 @@ class PostModelTest(TestCase):
 
 class GetUserPostsViewsTests(TestCase):
     def test_non_existing_user(self):
-        response = self.client.get(reverse('posts:get_user_posts', args=[1]))
+        response = self.client.get(reverse('posts:get_user_posts', args=['username']))
         self.assertEqual(response.status_code, 404)
 
     def test_no_posts(self):
         user = create_test_user()
-        response = self.client.get(reverse('posts:get_user_posts', args=[1]))
+        response = self.client.get(reverse('posts:get_user_posts', args=[user.username]))
         self.assertEqual(response.status_code, 404)
 
     def test_one_post(self):
         user = create_test_user()
         post = create_test_post(user)
         serialized_post = PostSerializer(post).data
-        response = self.client.get(reverse('posts:get_user_posts', args=[1]))
+        response = self.client.get(reverse('posts:get_user_posts', args=[user.username]))
         self.assertJSONEqual(str(response.content, encoding='utf8'), [serialized_post])
     
     def test_many_posts(self):
@@ -55,5 +55,6 @@ class GetUserPostsViewsTests(TestCase):
         serialized_post = PostSerializer(post).data
         post2 = create_test_post(user)
         serialized_post2 = PostSerializer(post2).data
-        response = self.client.get(reverse('posts:get_user_posts', args=[1]))
+        response = self.client.get(reverse('posts:get_user_posts', args=[user.username]))
         self.assertJSONEqual(str(response.content, encoding='utf8'), [serialized_post, serialized_post2])
+

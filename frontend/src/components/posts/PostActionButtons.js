@@ -1,14 +1,12 @@
 import './PostActionButtons.css'
 import comment from '../../img/comment.png'
-import like from '../../img/like.png'
-function PostActionButtons(){
+import LikeButton from './LikeButton';
+function PostActionButtons(props){
 
     return (
         <div className="post-action-buttons">
-            <span>
-                <img src={like} />
-                Like
-            </span>
+            
+            <LikeButton likes={props.likes} post_id={props.id}/>
             <span>
                 <img src={comment} />
                 Comment

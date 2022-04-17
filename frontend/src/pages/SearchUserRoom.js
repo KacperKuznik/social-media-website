@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar"
 import SearchUser from "../components/SearchUser";
 
-function Profile() {
+function SearchUserRoom() {
 
 
   return (
@@ -13,4 +13,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default SearchUserRoom;
