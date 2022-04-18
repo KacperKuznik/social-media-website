@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useState } from 'react';
 import Cookies from 'js-cookie';
 import changeAvatar from '../../img/change_avatar.png'
 import './ChangeAvatar.css'

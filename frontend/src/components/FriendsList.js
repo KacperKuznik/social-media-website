@@ -13,7 +13,7 @@ function FriendsList() {
         }
       }, [user]);
     return (
-      <div id="friends">
+      <div id="friends" className="post">
           {friends}
       </div>
     );
