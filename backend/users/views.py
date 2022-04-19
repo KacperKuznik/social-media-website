@@ -19,7 +19,6 @@ from .serializers import *
 # Create your views here.
 
 def login_view(request):
-
     if request.method == 'POST':
         data = json.loads(request.body)
         username = data.get('username')
@@ -64,19 +63,35 @@ def get_users(request):
 
 def get_user(request, username):
     obj = get_object_or_404(User, username=username)
+    serialized_user = UserSerializer(obj).data
+    return JsonResponse(serialized_user, safe=False)
 
+def get_user_by_id(request, id):
+    obj = get_object_or_404(User, id=id)
     serialized_user = UserSerializer(obj).data
     return JsonResponse(serialized_user, safe=False)
 
 def change_avatar(request):
-    print(request.FILES)
     avatar = request.FILES['avatar']
     request.user.avatar = avatar
     request.user.save()
     serialized_user = UserSerializer(request.user).data
     return JsonResponse(serialized_user, status=201)
 
+def change_background(request):
+    background = request.FILES['background']
+    request.user.background = background
+    request.user.save()
+    serialized_user = UserSerializer(request.user).data
+    return JsonResponse(serialized_user, status=201)
 
+def request_friend(request, username):
+    print(username)
+    friend = get_object_or_404(User, username=username)
+    request.user.toggle_friend_request(friend)
+    return HttpResponse(status=200)
 
-
-
+def accept_friend(request, username):
+    friend = get_object_or_404(User, username=username)
+    request.user.accept_friend_request(friend)
+    return HttpResponse(status=200)

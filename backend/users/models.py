@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     avatar = models.ImageField(upload_to='avatars', default='avatars/default.jpg')
+    background = models.ImageField(upload_to='backgrounds', default='backgrounds/default.jpg')
     friends = models.ManyToManyField('self')
 
     def accept_friend_request(self, user):
