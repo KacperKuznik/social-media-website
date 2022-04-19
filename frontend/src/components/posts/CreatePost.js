@@ -1,6 +1,5 @@
 import './Post.css'
 import PostSender from './PostSender';
-import img from '../wp5568745-archlinux-anime-wallpapers.png'
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';

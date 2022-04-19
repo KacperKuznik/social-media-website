@@ -1,0 +1,9 @@
+.friend img{
+    overflow: hidden;
+    clip-path: circle();
+    height: 70px;
+}
+.friend{
+    display: flex;
+    align-items: center;
+}

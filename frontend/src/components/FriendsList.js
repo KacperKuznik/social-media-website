@@ -1,20 +1,18 @@
 import { useState, useEffect } from "react";
 import '../styles/FriendsList.css'
+import Friend from "./Friend";
+function FriendsList(props) {
+    const [friends, setFriends] = useState([])
 
-function FriendsList() {
-    const [friends, setFriends] = useState(null)
-    const [user, setUser] = useState('')
+    useEffect(()=>{
+      if (props.friends)
+        setFriends(props.friends)
+    }, [props])
 
-    useEffect(() => {
-        const loggedInUser = localStorage.getItem('user');
-        if (loggedInUser){
-            setUser(JSON.parse(loggedInUser))
-            setFriends(user.friends)
-        }
-      }, [user]);
+
     return (
       <div id="friends" className="post">
-          {friends}
+          {friends.map((friend, index) => <Friend key={index} id={friend}/>)}
       </div>
     );
 }

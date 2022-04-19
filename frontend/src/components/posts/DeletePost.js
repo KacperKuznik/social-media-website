@@ -3,7 +3,7 @@ import axios from 'axios'
 const DeletePost = props =>{
     
     const deletePost = () => {
-        axios.get(`/posts/delete/${props.post_id}`)
+        axios.get(`/posts/delete/${props.id}`)
         .then((res) => props.onDelete())
     }
     return(

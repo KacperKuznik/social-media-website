@@ -1,0 +1,20 @@
+.change-background{
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.change-background > img{
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+}
+.change-background > input{
+    display: none;
+}

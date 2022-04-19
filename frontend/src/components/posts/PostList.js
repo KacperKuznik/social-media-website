@@ -16,7 +16,7 @@ function PostList(props){
         }
         else
             setUser(props.user)
-    }, [props])
+    }, [props, username])
     
     useEffect(() =>{
         axios.get(`/posts/${username}/`)
@@ -30,7 +30,7 @@ function PostList(props){
     }
     return (
         <div className="post-list" >
-            <CreatePost onCreatePost={(post) => setPosts([post, ...posts,]) } {...user}></CreatePost>
+            {props.isMyUser ? <CreatePost onCreatePost={(post) => setPosts([post, ...posts,]) } {...user} /> : null}
             {posts.map((post, index) => <Post key={index} post={post} user={user} onDelete={() => deletePost(post.id)}/>)}
 
         </div>

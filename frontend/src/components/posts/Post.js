@@ -2,14 +2,13 @@ import './Post.css'
 import PostActionButtons from './PostActionButtons';
 import PostSender from './PostSender';
 
-import img from '../wp5568745-archlinux-anime-wallpapers.png'
 import DeletePost from './DeletePost';
 function Post(props){
 
     return (
         <div className="post" >
             <PostSender {...props.user} />
-            <DeletePost post_id={props.post.post_id} onDelete={() => props.onDelete(props.post_id)}/>
+            <DeletePost id={props.post.id} onDelete={() => props.onDelete(props.id)}/>
             {props.data}
             {/* <PostData />
             
