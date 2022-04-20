@@ -1,13 +1,13 @@
 import { useState } from "react";
-import '../styles/DisplayProfile.css'
+import './DisplayProfile.css'
 import {motion, AnimatePresence} from 'framer-motion'
 import BackgroundImg from "./BackgroundImg";
-import PostList from "./posts/PostList";
-import ChangeAvatar from "./profile/ChangeAvatar";
-import FriendsList from "./FriendsList";
-import AddFriendButton from "./profile/AddFriendButton";
-import AcceptFriendButton from "./profile/AcceptFriendButton";
-import Avatar from "./profile/Avatar";
+import PostList from "../posts/PostList";
+import ChangeAvatar from "./ChangeAvatar";
+import FriendsList from "../FriendsList";
+import AddFriendButton from "./AddFriendButton";
+import AcceptFriendButton from "./AcceptFriendButton";
+import Avatar from "./Avatar";
 function DisplayProfile(props) {
   
 

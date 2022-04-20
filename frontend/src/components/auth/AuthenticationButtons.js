@@ -1,8 +1,8 @@
 import { useState } from "react";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm"
-import Overlay from "./Overlay";
-import '../styles/AuthenticationButtons.css'
+import Overlay from "../Overlay";
+import './AuthenticationButtons.css'
 
 function AuthenticationButtons() {
     const [showOverlay, setShowOverlay] = useState(false)

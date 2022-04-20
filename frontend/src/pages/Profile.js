@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar"
-import DisplayProfile from "../components/DisplayProfile"
+import DisplayProfile from "../components/profile/DisplayProfile"
 import {useParams} from "react-router-dom"
 import axios from "axios";
 

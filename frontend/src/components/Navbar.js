@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import AuthenticationButtons from './AuthenticationButtons';
-import Logout from './Logout';
+import AuthenticationButtons from './auth/AuthenticationButtons';
+import Logout from './auth/Logout';
 import {Link} from 'react-router-dom'
-import '../styles/Navbar.css'
+import './Navbar.css'
 
 
 

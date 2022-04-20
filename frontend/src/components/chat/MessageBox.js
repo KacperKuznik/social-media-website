@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState, useRef} from 'react';
-import '../styles/MessageBox.css'
+import './MessageBox.css'
 import Messages from './Messages';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router';

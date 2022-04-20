@@ -1,4 +1,4 @@
-import ChangeBackgroundImg from "./profile/ChangeBackgroundImg";
+import ChangeBackgroundImg from "./ChangeBackgroundImg";
 
 function BackgroundImg(props){
     return(<div className='background-img'>

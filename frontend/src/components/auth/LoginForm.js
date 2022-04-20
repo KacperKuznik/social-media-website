@@ -2,17 +2,16 @@ import { useState } from "react";
 import axios from 'axios';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
-//import '../styles/SignupForm.css'
+import './LoginForm.css'
 
 
-function SignupForm() {
+function LoginForm() {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
     const [ErrorMessage, setErrorMessage] = useState("")
 
-    async function sendSignupData(e){
+    async function sendLoginData(e){
         e.preventDefault();
 
         let body = {
@@ -26,7 +25,7 @@ function SignupForm() {
             'X-CSRFTOKEN': Cookies.get('csrftoken'),
             }
         }
-        await axios.post('users/signup/', body, config)
+        await axios.post('/users/login/', body, config)
         .then(res => {
             const user = res.data;
             localStorage.setItem("user", JSON.stringify(user))
@@ -38,14 +37,13 @@ function SignupForm() {
     }
 
     return (
-        <form className="signup-form" onSubmit={(e) => sendSignupData(e)}>
+        <form className="login-form" onSubmit={(e) => sendLoginData(e)}>
             <input type='text' value={username} placeholder="username" onChange={(e) => setUsername(e.target.value)}></input>
             <input type='password' value={password} placeholder="password" onChange={(e) => setPassword(e.target.value)}></input>
-            <input type='email' value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)}></input>
             <button>Login</button>
             {ErrorMessage}
         </form>
     );
 }
 
-export default SignupForm;
+export default LoginForm;

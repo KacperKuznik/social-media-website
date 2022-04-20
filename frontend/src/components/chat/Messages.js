@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import '../styles/Messages.css'
+import './Messages.css'
 
 function Messages(props) {
   const [showInfo, setShowInfo] = useState(false)
