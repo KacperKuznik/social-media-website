@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {useParams} from 'react-router-dom'
-function AddFriendButton() {
+function RemoveFriendButton() {
     const {username} = useParams()
-    async function add(){
-        await axios.get(`/users/friends/request/${username}/`)
+    async function remove(){
+        await axios.get(`/users/friends/remove/${username}/`)
         .then(res => {
 
         })
@@ -14,8 +14,8 @@ function AddFriendButton() {
 
 
     return (
-        <button onClick={add}>Add Friend</button>
+        <button onClick={remove}>Remove Friend</button>
     );
 }
 
-export default AddFriendButton;
+export default RemoveFriendButton;

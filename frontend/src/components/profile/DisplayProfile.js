@@ -8,8 +8,10 @@ import FriendsList from "../FriendsList";
 import AddFriendButton from "./AddFriendButton";
 import AcceptFriendButton from "./AcceptFriendButton";
 import Avatar from "./Avatar";
+import RemoveFriendButton from "./RemoveFriendButton";
 function DisplayProfile(props) {
-  
+
+    
 
   return (
     <div className="display-profile">
@@ -17,6 +19,9 @@ function DisplayProfile(props) {
       <div className="profile-info">
         <Avatar avatar={props.user.avatar} isMyUser={props.isMyUser}/>
         <h1>{props.user.username}</h1>
+        <RemoveFriendButton />
+        <AcceptFriendButton />
+        <AddFriendButton />
     </div>
     <PostList user={props.user} isMyUser={props.isMyUser}/>
     

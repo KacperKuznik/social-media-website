@@ -14,7 +14,7 @@ function AcceptFriendButton() {
 
 
     return (
-        <button onClick={add}></button>
+        <button onClick={add}>Accept Friend</button>
     );
 }
 

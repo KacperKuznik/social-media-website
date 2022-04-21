@@ -95,3 +95,8 @@ def accept_friend(request, username):
     friend = get_object_or_404(User, username=username)
     request.user.accept_friend_request(friend)
     return HttpResponse(status=200)
+
+def remove_friend(request, username):
+    friend = get_object_or_404(User, username=username)
+    request.user.remove_friend(friend)
+    return HttpResponse(status=200)
