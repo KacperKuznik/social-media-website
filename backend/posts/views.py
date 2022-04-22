@@ -1,3 +1,4 @@
+from os import POSIX_FADV_DONTNEED
 from pyexpat import model
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.http import HttpResponse, JsonResponse
@@ -32,3 +33,11 @@ def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.delete()
     return HttpResponse(status=204)
+
+def get_home_posts(request):
+    posts = []
+    for friend in request.user.friends.all():
+        posts += Post.objects.filter(creator=friend)
+        print(posts)
+    serialized_posts = PostSerializer(posts, many=True).data
+    return JsonResponse(serialized_posts, safe=False)
