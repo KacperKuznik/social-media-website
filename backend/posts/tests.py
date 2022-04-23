@@ -69,12 +69,13 @@ class GetHomePostsViewsTests(TestCase):
         user3 = create_test_user('user3')
         friend_request = user3.toggle_friend_request(user1)
         accept = user1.accept_friend_request(user3)
+        post1 = create_test_post(user2)
+        post2 = create_test_post(user3)
+        serialized_post1 = PostSerializer(post1).data
+        serialized_post2 = PostSerializer(post2).data
 
-        create_test_post(user2)
-        create_test_post(user3)
-        create_test_post(user2)
-        create_test_post(user3)
         
         self.client.force_login(user1)
         response = self.client.get(reverse('posts:get_home_posts'))
-        self.assertJSONEqual(str(response.content, encoding='utf8'),True)
+        self.assertJSONEqual(str(response.content, encoding='utf8'), [serialized_post1, serialized_post2])
+
