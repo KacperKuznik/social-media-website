@@ -19,6 +19,7 @@ function Navbar() {
     return (
       <nav className='navbar'>
         <div className='left-nav'>
+          <Link to={'/home/'} >home</Link>
           <Link to={'/profile/'+user.username} >profile</Link>
           <Link to='/messages'>messages</Link>
         </div>

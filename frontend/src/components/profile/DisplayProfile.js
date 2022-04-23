@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './DisplayProfile.css'
 import {motion, AnimatePresence} from 'framer-motion'
 import BackgroundImg from "./BackgroundImg";
@@ -10,7 +10,26 @@ import AcceptFriendButton from "./AcceptFriendButton";
 import Avatar from "./Avatar";
 import RemoveFriendButton from "./RemoveFriendButton";
 function DisplayProfile(props) {
+  const [myUser, setMyUser] = useState('')
+  const [friendButton, setFriendButton] = useState(null)
+  useEffect(() => {
+    
+    const loggedInUser = localStorage.getItem('user');
+    if (loggedInUser){
+      setMyUser(JSON.parse(loggedInUser))
+      }
+  }, []);
 
+  useEffect(() => {
+
+    if (props.user && !props.isMyUser){
+      if (props.user.friends.includes(myUser.id))
+        setFriendButton(<RemoveFriendButton />)
+      else
+        setFriendButton(<AddFriendButton />)
+    }
+  }, [props.user])
+  
     
 
   return (
@@ -19,9 +38,7 @@ function DisplayProfile(props) {
       <div className="profile-info">
         <Avatar avatar={props.user.avatar} isMyUser={props.isMyUser}/>
         <h1>{props.user.username}</h1>
-        <RemoveFriendButton />
-        <AcceptFriendButton />
-        <AddFriendButton />
+        {friendButton}
     </div>
     <PostList user={props.user} isMyUser={props.isMyUser}/>
     
