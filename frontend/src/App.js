@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage';
 import Profile from './pages/Profile';
 import MessageRoom from './pages/MessageRoom';
 import SearchUserRoom from './pages/SearchUserRoom';
+import LandingPage from './pages/LandingPage';
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/profile/:username" element={<Profile />} />
           <Route path="/messages" element={<SearchUserRoom />} />
           <Route path="/messages/:room_id" element={<MessageRoom />} />
