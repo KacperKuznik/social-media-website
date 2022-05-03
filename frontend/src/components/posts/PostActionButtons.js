@@ -6,7 +6,7 @@ function PostActionButtons(props){
     return (
         <div className="post-action-buttons">
             
-            <LikeButton likes={props.likes} post_id={props.id}/>
+            <LikeButton likes={props.likes} liked_by={props.liked_by} post_id={props.id}/>
             <span>
                 <img src={comment} />
                 Comment

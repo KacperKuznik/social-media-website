@@ -7,6 +7,7 @@ from .models import Post
 from django.views import generic
 from rest_framework import viewsets
 from users.models import User
+import json
 
 # Create your views here.
 
@@ -25,7 +26,9 @@ def like(request, post_id):
     return JsonResponse({"likes": post.likes})
 
 def create_post(request):
-    post = Post.objects.create(creator=request.user)
+    data = json.loads(request.body)
+    text = data.get("text")
+    post = Post.objects.create(text=text,creator=request.user)
     serialized_post = PostSerializer(post).data
     return JsonResponse(serialized_post, safe=False)
 

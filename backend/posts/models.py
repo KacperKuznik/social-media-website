@@ -6,6 +6,7 @@ from users.models import User
 
 
 class Post(models.Model):
+    text = models.TextField(default="")
     creator = models.ForeignKey(User, related_name='post_creator',on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
     liked_by = models.ManyToManyField(User, related_name='liked_by')

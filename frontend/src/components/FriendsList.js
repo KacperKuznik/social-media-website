@@ -12,6 +12,7 @@ function FriendsList(props) {
 
     return (
       <div id="friends" className="post">
+          <h3>Friends ({friends.length}):</h3>
           {friends.map((friend, index) => <Friend key={index} id={friend}/>)}
       </div>
     );
