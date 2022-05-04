@@ -28,7 +28,7 @@ function DisplayProfile(props) {
       else
         setFriendButton(<AddFriendButton />)
     }
-  }, [props.user])
+  }, [props, myUser])
   
     
 
