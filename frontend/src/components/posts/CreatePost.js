@@ -3,6 +3,7 @@ import PostSender from './PostSender';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import RoundedBox from '../RoundedBox';
 function CreatePost(props){
     const [text, setText] = useState("")
 
@@ -26,7 +27,7 @@ function CreatePost(props){
         
     }
     return (
-        <div className="post" >
+        <RoundedBox>
             <PostSender avatar={props.avatar} firstname={props.username} lastname={""}/>
             <br></br>
         
@@ -34,7 +35,7 @@ function CreatePost(props){
                 <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder='Create new post'></input>
                 <button>Send</button>
             </form>
-        </div>
+        </RoundedBox>
     )
 
 
