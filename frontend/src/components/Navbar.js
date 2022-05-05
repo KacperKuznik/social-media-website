@@ -26,7 +26,7 @@ function Navbar() {
         <div className='right-nav'>
           {user ? <Logout /> : <AuthenticationButtons />}
           <Link to={'/profile/'+user.username} className='img-link'>
-            <img className='avatar' src={user.avatar}/>
+            <img className='avatar' alt='avatar' src={user.avatar}/>
           </Link>
         </div>
       </nav>
