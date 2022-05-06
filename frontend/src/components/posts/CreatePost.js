@@ -3,7 +3,11 @@ import PostSender from './PostSender';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+<<<<<<< Updated upstream
 import RoundedBox from '../RoundedBox';
+=======
+import UploadPhotos from './UploadPhotos';
+>>>>>>> Stashed changes
 function CreatePost(props){
     const [text, setText] = useState("")
 
@@ -33,6 +37,7 @@ function CreatePost(props){
         
             <form onSubmit={(e) => createNewPost(e)}>
                 <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder='Create new post'></input>
+                <UploadPhotos />
                 <button>Send</button>
             </form>
         </RoundedBox>
