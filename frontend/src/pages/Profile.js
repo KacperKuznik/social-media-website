@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar"
 import DisplayProfile from "../components/profile/DisplayProfile"
 import {useParams} from "react-router-dom"
 import axios from "axios";
-
+import UserDetailsContext from '../context/UserDetailsContext'
 
 function Profile() {
   const [user, setUser] = useState('')
@@ -27,8 +27,9 @@ function Profile() {
   return (
     <div>
       <Navbar />
+      <UserDetailsContext.Provider value={user}>
       <DisplayProfile user={user} isMyUser={username===myUser.username}/>
-      
+      </UserDetailsContext.Provider>
     </div>
   );
 }

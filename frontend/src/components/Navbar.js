@@ -1,33 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import AuthenticationButtons from './auth/AuthenticationButtons';
 import Logout from './auth/Logout';
 import {Link} from 'react-router-dom'
+import UserDetailsContext from '../context/UserDetailsContext'
 import './Navbar.css'
 
 
 
 function Navbar() {
-    const [user, setUser] = useState('')
-
-    useEffect(() => {
-        const loggedInUser = localStorage.getItem('user');
-        if (loggedInUser){
-            setUser(JSON.parse(loggedInUser))
-        }
-      }, []);
+    const {user} = useContext(UserDetailsContext)
 
     return (
       <nav className='navbar'>
+        
         <div className='left-nav'>
           <Link to={'/home/'} >home</Link>
-          <Link to={'/profile/'+user.username} >profile</Link>
-          <Link to='/messages'>messages</Link>
+          {user? <>
+            <Link to={'/profile/'+user?.username} >profile</Link>
+            <Link to='/messages'>messages</Link>
+          </>
+          : null}
+
         </div>
         <div className='right-nav'>
-          {user ? <Logout /> : <AuthenticationButtons />}
-          <Link to={'/profile/'+user.username} className='img-link'>
-            <img className='avatar' alt='avatar' src={user.avatar}/>
+          {user ? 
+          <>
+            <Logout /> 
+            <Link to={'/profile/'+user?.username} className='img-link'>
+            <img className='avatar' alt='avatar' src={user?.avatar}/>
           </Link>
+          </>: <AuthenticationButtons />}
+
         </div>
       </nav>
     );

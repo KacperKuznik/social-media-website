@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from 'axios';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 import './LoginForm.css'
+import UserDetailsContext from "../../context/UserDetailsContext";
 
 
 function LoginForm() {
     const navigate = useNavigate();
+    const { user, setUser } = useContext(UserDetailsContext)
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [ErrorMessage, setErrorMessage] = useState("")
@@ -28,6 +30,7 @@ function LoginForm() {
         await axios.post('/users/login/', body, config)
         .then(res => {
             const user = res.data;
+            setUser(user)
             localStorage.setItem("user", JSON.stringify(user))
             navigate('/profile/'+user.username)
         })

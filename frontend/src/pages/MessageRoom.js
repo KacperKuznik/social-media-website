@@ -14,6 +14,7 @@ function MessageRoom() {
     const room = useParams()
     const [messages, setMessages] = useState()
     const [user, setUser] = useState('')
+    
 
   useEffect(() => {
       const loggedInUser = localStorage.getItem('user');

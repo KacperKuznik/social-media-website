@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import './DisplayProfile.css'
 import {motion, AnimatePresence} from 'framer-motion'
 import BackgroundImg from "./BackgroundImg";
@@ -9,8 +9,11 @@ import AddFriendButton from "./AddFriendButton";
 import AcceptFriendButton from "./AcceptFriendButton";
 import Avatar from "./Avatar";
 import RemoveFriendButton from "./RemoveFriendButton";
+import UserDetailsContext from "../../context/UserDetailsContext";
+import FriendButton from "./FriendButton";
 function DisplayProfile(props) {
   const [myUser, setMyUser] = useState('')
+  const userDetails = useContext(UserDetailsContext)
   const [friendButton, setFriendButton] = useState(null)
   useEffect(() => {
     
@@ -19,7 +22,6 @@ function DisplayProfile(props) {
       setMyUser(JSON.parse(loggedInUser))
       }
   }, []);
-
   useEffect(() => {
 
     if (props.user && !props.isMyUser){
@@ -34,15 +36,17 @@ function DisplayProfile(props) {
 
   return (
     <div className="display-profile">
-      <BackgroundImg background={props.user.background} username={props.user.username} isMyUser={props.isMyUser}/>
+      <BackgroundImg />
       <div className="profile-info">
         <Avatar avatar={props.user.avatar} isMyUser={props.isMyUser}/>
         <h1>{props.user.username}</h1>
+
         {friendButton}
+        <FriendButton />
     </div>
     <PostList user={props.user} isMyUser={props.isMyUser}/>
     
-    <FriendsList friends={props.user.friends}/>
+    <FriendsList />
     {/* <AddFriendButton />
     <AcceptFriendButton /> */}
     </div>
