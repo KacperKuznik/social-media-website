@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import addPhoto from '../../img/add_photo.png'
+import './UploadPhotos.css'
 
 function UploadPhotos() {
     
