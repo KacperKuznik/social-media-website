@@ -1,26 +1,19 @@
-import UserDetailsContext from "../../context/UserDetailsContext";
-import {useContext, useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useContext} from 'react'
 import RemoveFriendButton from "./RemoveFriendButton";
 import AddFriendButton from "./AddFriendButton";
+import UserDetailsContext from "../../context/UserDetailsContext";
+import VisitedUserDetailsContext from "../../context/VisitedUserDetailsContext";
 
 function FriendButton(){
-    const visitedUser = useParams()
-    const user = useContext(UserDetailsContext)
-    const [friendButton, setFriendButton] = useState(null)
+    const visitedUser = useContext(VisitedUserDetailsContext)
+    const {user} = useContext(UserDetailsContext)
 
-    useEffect(() => {
-            
-        if (user && visitedUser.username!=user.username){
-          if (user.friends.includes(user.id))
-            setFriendButton(<RemoveFriendButton />)
-          else
-            setFriendButton(<AddFriendButton />)
-        }
-      }, [user])
-    return(<div>
-        {friendButton}
-        </div>
-    )
+    if (!user || !visitedUser || visitedUser?.id == user?.id){
+        return 
+    } else if (user?.friends?.includes(visitedUser?.id)){
+        return <RemoveFriendButton />
+    } else {
+        return<AddFriendButton />
+    }
 }
 export default FriendButton;

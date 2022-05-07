@@ -2,10 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import './FriendsList.css'
 import Friend from "./Friend";
 import RoundedBox from "./RoundedBox";
-import UserDetailsContext from "../context/UserDetailsContext";
+import VisitedUserDetailsContext from "../context/VisitedUserDetailsContext";
 
 function FriendsList() {
-    const user = useContext(UserDetailsContext)
+    const user = useContext(VisitedUserDetailsContext)
    
     return (
       <RoundedBox id="friends"> 

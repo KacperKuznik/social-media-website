@@ -1,35 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Navbar from "../components/Navbar"
 import DisplayProfile from "../components/profile/DisplayProfile"
 import {useParams} from "react-router-dom"
 import axios from "axios";
-import UserDetailsContext from '../context/UserDetailsContext'
+import VisitedUserDetailsContext from '../context/VisitedUserDetailsContext'
 
 function Profile() {
-  const [user, setUser] = useState('')
-  const [myUser, setMyUser] = useState('')
   const {username} = useParams();
-
-
-  useEffect(() => {
-      const myUser = localStorage.getItem('user');
-      if (myUser){
-          setMyUser(JSON.parse(myUser))
-      }
-    }, []);
+  const [visitedUser, setVisitedUser] = useState()
+  
 
   useEffect(() => {
       axios.get(`/users/${username}/`)
-      .then(res => setUser(res.data))
+      .then(res => setVisitedUser(res.data))
   }, [username])
 
 
   return (
     <div>
       <Navbar />
-      <UserDetailsContext.Provider value={user}>
-      <DisplayProfile user={user} isMyUser={username===myUser.username}/>
-      </UserDetailsContext.Provider>
+      <VisitedUserDetailsContext.Provider value={visitedUser}>
+      <DisplayProfile/>
+      </VisitedUserDetailsContext.Provider>
     </div>
   );
 }
