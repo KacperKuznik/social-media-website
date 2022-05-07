@@ -20,7 +20,12 @@ class Post(models.Model):
             self.liked_by.remove(user)
 
 
+
 class Comment(models.Model):
     creator = models.ForeignKey(User, related_name='comment_creator',on_delete=models.CASCADE)
     post = models.ForeignKey(Post,  related_name='post',on_delete=models.CASCADE)
     #likes = models.IntegerField(default=0)
+
+class Image(models.Model):
+    image = models.ImageField(upload_to='post_images', default=None, blank=True, null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)

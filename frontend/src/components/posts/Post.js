@@ -11,11 +11,10 @@ function Post(props){
         <RoundedBox  className='post'>
             <div className='post'>
                 <PostSender />
-                <PostData text={props.post.text}/>
+                <PostData post={props.post} />
                 {/* 
                 <PostComment /> */}
                 <DeletePost id={props.post.id} onDelete={() => props.onDelete(props.id)}/>
-            
                 <hr></hr>
                 <PostActionButtons {...props.post}/>
             </div>

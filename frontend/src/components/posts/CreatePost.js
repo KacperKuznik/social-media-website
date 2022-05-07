@@ -4,16 +4,17 @@ import { useState } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import RoundedBox from '../RoundedBox';
-import UploadPhotos from './UploadPhotos';
+import UploadImages from './UploadImages';
 function CreatePost(props){
     const [text, setText] = useState("")
+    const [images, setImages] = useState([]);
+
 
     async function createNewPost(e){
         e.preventDefault();
-
-        let body = {
-            text: text
-        }
+        const data = new FormData()
+        data.append('text', text)
+        images.forEach((image) => data.append('images', image))
         let config = {
             withCredentials: true,
             headers: {
@@ -21,9 +22,10 @@ function CreatePost(props){
             'X-CSRFTOKEN': Cookies.get('csrftoken'),
             }
         }
-        await axios.post('/posts/create/', body, config)
+        await axios.post('/posts/create/', data, config)
         .then(res => {
-            props.onCreatePost(res.data)
+            props.onCreatePost(res.data);
+            console.log(res.data);
         })
         
     }
@@ -31,10 +33,10 @@ function CreatePost(props){
         <RoundedBox>
             <PostSender avatar={props.avatar} firstname={props.username} lastname={""}/>
             <br></br>
-        
             <form onSubmit={(e) => createNewPost(e)} style={{display: "flex"}}>
                 <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder='Create new post'></input>
-                <UploadPhotos />
+                <UploadImages setImages={(files) => setImages([...images, ...files])}/>
+                {images.length > 0 ? <>Selected {images.length} images </> : null}
                 <button>Send</button>
             </form>
         </RoundedBox>
