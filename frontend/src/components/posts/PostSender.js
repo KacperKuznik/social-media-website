@@ -1,10 +1,13 @@
 import './PostSender.css'
-function PostSender(props){
+import VisitedUserDetailsContext from "../../context/VisitedUserDetailsContext";
+import {useContext} from 'react'
 
+function PostSender(){
+    const visitedUser = useContext(VisitedUserDetailsContext)
     return (
         <div className="post-sender">
-            <img src={props.avatar} />
-            <h3>{props.firstname + " " + props.lastname}</h3>
+            <img src={visitedUser?.avatar} />
+            <h3>{visitedUser?.firstname + " " + visitedUser?.lastname}</h3>
         </div>
     )
 

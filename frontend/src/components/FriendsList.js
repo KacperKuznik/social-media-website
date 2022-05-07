@@ -1,20 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import './FriendsList.css'
 import Friend from "./Friend";
 import RoundedBox from "./RoundedBox";
-function FriendsList(props) {
-    const [friends, setFriends] = useState([])
+import VisitedUserDetailsContext from "../context/VisitedUserDetailsContext";
 
-    useEffect(()=>{
-      if (props.friends)
-        setFriends(props.friends)
-    }, [props])
-
-
+function FriendsList() {
+    const user = useContext(VisitedUserDetailsContext)
+   
     return (
       <RoundedBox id="friends"> 
-          <h3>Friends ({friends.length}):</h3>
-          {friends.map((friend, index) => <Friend key={index} id={friend}/>)}
+          <h3>Friends ({user?.friends?.length}):</h3>
+          {user?.friends?.map((friend, index) => <Friend key={index} id={friend}/>)}
       </RoundedBox>
     );
 }

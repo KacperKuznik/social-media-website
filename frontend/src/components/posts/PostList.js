@@ -6,17 +6,8 @@ import axios from 'axios';
 import {useParams} from 'react-router-dom'
 function PostList(props){
     const [posts, setPosts] = useState([])
-    const [user, setUser] = useState()
     const {username} = useParams();
 
-    useEffect(() => {
-        if (username != props.user.username){
-            axios.get(`/users/${username}/`)
-            .then(res => setUser(res.data))
-        }
-        else
-            setUser(props.user)
-    }, [props, username])
     
     useEffect(() =>{
         axios.get(`/posts/${username}/`)
@@ -30,9 +21,9 @@ function PostList(props){
     }
     return (
         <div className="post-list" >
-            {props.isMyUser ? <CreatePost onCreatePost={(post) => setPosts([post, ...posts,]) } {...user} /> : null}
+            {props.isMyUser ? <CreatePost onCreatePost={(post) => setPosts([post, ...posts,]) }  /> : null}
             {posts.length == 0 ? "this user doesn't have any posts" : 
-                posts.map((post, index) => <Post key={index} post={post} user={user} onDelete={() => deletePost(post.id)}/>)}
+                posts.map((post, index) => <Post key={index} post={post}  onDelete={() => deletePost(post.id)}/>)}
 
         </div>
     )

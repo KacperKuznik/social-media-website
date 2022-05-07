@@ -10,7 +10,7 @@ function Post(props){
     return (
         <RoundedBox  className='post'>
             <div className='post'>
-                <PostSender {...props.user} />
+                <PostSender />
                 <PostData text={props.post.text}/>
                 {/* 
                 <PostComment /> */}
