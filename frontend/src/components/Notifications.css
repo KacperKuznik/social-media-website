@@ -1,0 +1,25 @@
+.notifications{
+    margin: 0 10px;
+    padding: 0 5px;
+    position: relative
+
+}
+
+.notifications img{
+    width: 30px;
+    height: 30px;
+}
+.notifications-count {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 0.7em;
+    position: absolute;
+    top: 0;
+    right: 0;
+}

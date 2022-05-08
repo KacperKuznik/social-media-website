@@ -4,6 +4,7 @@ import Logout from './auth/Logout';
 import {Link} from 'react-router-dom'
 import UserDetailsContext from '../context/UserDetailsContext'
 import './Navbar.css'
+import Notifications from './Notifications'
 
 
 
@@ -25,6 +26,7 @@ function Navbar() {
         <div className='right-nav'>
           {user ? 
           <>
+            <Notifications/>
             <Logout /> 
             <Link to={'/profile/'+user?.username} className='img-link'>
             <img className='avatar' alt='avatar' src={user?.avatar}/>

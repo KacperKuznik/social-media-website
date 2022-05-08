@@ -100,3 +100,7 @@ def remove_friend(request, username):
     friend = get_object_or_404(User, username=username)
     request.user.remove_friend(friend)
     return HttpResponse(status=200)
+
+def get_notifications(request):
+    serialized_notifications = NotificationSerializer(request.user.notifications.all(), many=True).data
+    return JsonResponse(serialized_notifications, safe=False, status=200)

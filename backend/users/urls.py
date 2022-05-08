@@ -13,6 +13,7 @@ urlpatterns = [
     path('friends/remove/<str:username>/', remove_friend, name='remove_friend'),
     path('change_avatar/', change_avatar, name='change_avatar'),
     path('change_background/', change_background, name='change_background'),
+    path('notifications/', get_notifications, name='get_notifications'),
     path('get_users/', get_users, name='get_users'),
     path('id/<int:id>/', get_user_by_id, name='get_user_by_id'),
     path('<str:username>/', get_user, name='get_user'),

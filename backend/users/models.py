@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 # Create your models here.
 
 
@@ -25,7 +26,8 @@ class User(AbstractUser):
         if friend_request.exists():
             friend_request[0].delete()
         else:
-            FriendRequest.objects.create(request_from=self, request_to=user)
+            friend_request = FriendRequest.objects.create(request_from=self, request_to=user)
+            Notification.objects.create(notification_to=user, notificaiton_from=self, friend_request=friend_request, message=f"{self.username} wants to be your friend")
     
     def remove_friend(self, user):
         self.friends.remove(user)
@@ -33,3 +35,11 @@ class User(AbstractUser):
 class FriendRequest(models.Model):
     request_from = models.ForeignKey(User, related_name='request_from', on_delete=models.CASCADE)
     request_to = models.ForeignKey(User, related_name='request_to', on_delete=models.CASCADE)
+
+
+class Notification(models.Model):
+    notification_to = models.ForeignKey(User, related_name='notifications' ,on_delete=models.CASCADE)
+    notificaiton_from = models.ForeignKey(User, related_name='created_notifications', on_delete=models.CASCADE, null=True, blank=True)
+    friend_request = models.ForeignKey(FriendRequest, on_delete=models.CASCADE, null=True, blank=True)
+    seen = models.BooleanField(default=False)
+    message = models.TextField(max_length=60)
