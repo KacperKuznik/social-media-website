@@ -11,7 +11,7 @@ class User(AbstractUser):
     friends = models.ManyToManyField('self')
 
     def accept_friend_request(self, user):
-        friend_request = FriendRequest.objects.filter(request_to=self, request_from=user) 
+        friend_request = user.request_from.filter(request_to=self) 
         if friend_request.exists():
             self.friends.add(user)
             friend_request.delete()
@@ -20,9 +20,9 @@ class User(AbstractUser):
 
     def toggle_friend_request(self,user):
         #delete if exists else create
-        if FriendRequest.objects.filter(request_from=user, request_to=self).exists():
+        if user.request_from.filter(request_to=self).exists():
             return False
-        friend_request = FriendRequest.objects.filter(request_from=self, request_to=user)
+        friend_request = user.request_to.filter(request_from=self)
         if friend_request.exists():
             friend_request[0].delete()
         else:
