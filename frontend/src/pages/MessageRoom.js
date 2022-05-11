@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar/Navbar";
 import axios from "axios";
 import MessageBox from "../components/chat/MessageBox";
 import FriendsList from "../components/FriendsList";

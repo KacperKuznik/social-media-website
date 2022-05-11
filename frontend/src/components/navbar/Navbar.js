@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
-import AuthenticationButtons from './auth/AuthenticationButtons';
-import Logout from './auth/Logout';
+import AuthenticationButtons from '../auth/AuthenticationButtons';
+import Logout from '../auth/Logout';
 import {Link} from 'react-router-dom'
-import UserDetailsContext from '../context/UserDetailsContext'
+import UserDetailsContext from '../../context/UserDetailsContext'
 import './Navbar.css'
 import Notifications from './Notifications'
 

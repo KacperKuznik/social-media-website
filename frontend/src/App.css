@@ -1,5 +1,6 @@
 :root{
-    --main-theme: #8d5bc0
+    --main-theme: #8d5bc0;
+    --nav-height: 60px;
 }
 body{
     background-color: #e8e8e8;
