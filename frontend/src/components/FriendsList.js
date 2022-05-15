@@ -8,10 +8,12 @@ function FriendsList() {
     const user = useContext(VisitedUserDetailsContext)
    
     return (
-      <RoundedBox id="friends"> 
-          <h3>Friends ({user?.friends?.length}):</h3>
-          {user?.friends?.map((friend, index) => <Friend key={index} id={friend}/>)}
-      </RoundedBox>
+      <div id="friends">
+        <RoundedBox > 
+            <h3>Friends ({user?.friends?.length}):</h3>
+            {user?.friends?.map((friend, index) => <Friend key={index} id={friend}/>)}
+        </RoundedBox>
+      </div>
     );
 }
 
