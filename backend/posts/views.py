@@ -51,5 +51,7 @@ def get_home_posts(request):
     posts = []
     for friend in request.user.friends.all():
         posts += friend.created_posts.all()
+    posts = sorted(posts, key=lambda x: x.id)
+
     serialized_posts = PostSerializer(posts, many=True).data
     return JsonResponse(serialized_posts, safe=False)

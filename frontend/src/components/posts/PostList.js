@@ -22,7 +22,7 @@ function PostList(props){
     return (
         <div className="post-list" >
             {props.isMyUser ? <CreatePost onCreatePost={(post) => setPosts([post, ...posts,]) }  /> : null}
-            {posts.length == 0 ? "this user doesn't have any posts" : 
+            {posts.length === 0 ? "this user doesn't have any posts" : 
                 posts.map((post, index) => <Post key={index} post={post}  onDelete={() => deletePost(post.id)}/>)}
 
         </div>
