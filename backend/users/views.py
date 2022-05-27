@@ -18,6 +18,7 @@ from rest_framework.decorators import api_view
 from .serializers import *
 # Create your views here.
 
+
 def login_view(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -31,6 +32,7 @@ def login_view(request):
                 return JsonResponse(serialized_user, status=200, safe=False)
             return JsonResponse({"message": "Wrong username or password"}, status=401)
     return JsonResponse({"message": "Incorrect data"}, status=400)
+
 
 def logout_view(request):
     logout(request)
@@ -47,7 +49,7 @@ def signup_view(request):
             username = data.get('username')
             password = data.get('password')
             email = data.get('email')
-            
+
             User.objects.create_user(
                 username=username, password=password, email=email)
             user = authenticate(username=username, password=password)
@@ -55,6 +57,7 @@ def signup_view(request):
             serialized_user = UserSerializer(user).data
             return JsonResponse(serialized_user, status=201)
     return JsonResponse({"message": "Incorrect data"}, status=400)
+
 
 def get_users(request):
     response = list(User.objects.values())
@@ -66,10 +69,12 @@ def get_user(request, username):
     serialized_user = UserSerializer(obj).data
     return JsonResponse(serialized_user, safe=False)
 
+
 def get_user_by_id(request, id):
     obj = get_object_or_404(User, id=id)
     serialized_user = UserSerializer(obj).data
     return JsonResponse(serialized_user, safe=False)
+
 
 def change_avatar(request):
     avatar = request.FILES['avatar']
@@ -78,6 +83,7 @@ def change_avatar(request):
     serialized_user = UserSerializer(request.user).data
     return JsonResponse(serialized_user, status=201)
 
+
 def change_background(request):
     background = request.FILES['background']
     request.user.background = background
@@ -85,25 +91,31 @@ def change_background(request):
     serialized_user = UserSerializer(request.user).data
     return JsonResponse(serialized_user, status=201)
 
+
 def request_friend(request, username):
     print(username)
     friend = get_object_or_404(User, username=username)
     request.user.toggle_friend_request(friend)
     return HttpResponse(status=200)
 
+
 def accept_friend(request, username):
     friend = get_object_or_404(User, username=username)
     request.user.accept_friend_request(friend)
     return HttpResponse(status=200)
+
 
 def remove_friend(request, username):
     friend = get_object_or_404(User, username=username)
     request.user.remove_friend(friend)
     return HttpResponse(status=200)
 
+
 def get_notifications(request):
-    serialized_notifications = NotificationSerializer(request.user.notifications.all(), many=True).data
+    serialized_notifications = NotificationSerializer(
+        request.user.notifications.all(), many=True).data
     return JsonResponse(serialized_notifications, safe=False, status=200)
+
 
 def seen_notification(request, id):
     notification = get_object_or_404(Notification, pk=id)
