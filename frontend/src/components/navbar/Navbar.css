@@ -26,3 +26,8 @@
     align-items: center;
     margin: 0 5%;
 }
+.left-nav > a {
+    margin: 5px;
+    color: white;
+    text-decoration: none
+}

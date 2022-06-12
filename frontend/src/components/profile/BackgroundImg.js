@@ -7,7 +7,7 @@ function BackgroundImg(){
     const {user} = useContext(UserDetailsContext)
     const visitedUser = useContext(VisitedUserDetailsContext)
     return(<div className='background-img'>
-        <img src={visitedUser?.background}></img>
+        <img src={visitedUser?.background} alt='user background'></img>
         {visitedUser?.id === user?.id ? <ChangeBackgroundImg username={visitedUser?.username} />: null}
     </div>)
 }

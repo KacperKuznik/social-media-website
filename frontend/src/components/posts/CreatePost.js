@@ -1,13 +1,15 @@
 import './Post.css'
 import PostSender from './PostSender';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import RoundedBox from '../RoundedBox';
 import UploadImages from './UploadImages';
+import UserDetailsContext from '../../context/UserDetailsContext';
 function CreatePost(props){
     const [text, setText] = useState("")
     const [images, setImages] = useState([]);
+    const {user} = useContext(UserDetailsContext);
 
 
     async function createNewPost(e){
@@ -31,12 +33,13 @@ function CreatePost(props){
     }
     return (
         <RoundedBox>
-            <PostSender avatar={props.avatar} firstname={props.username} lastname={""}/>
+            {console.log(user)}
+            <PostSender {...user}/>
             <br></br>
             <form onSubmit={(e) => createNewPost(e)} style={{display: "flex"}}>
                 <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder='Create new post'></input>
                 <UploadImages setImages={(files) => setImages([...images, ...files])}/>
-                {images.length > 0 ? <>Selected {images.length} images </> : null}
+                {images.length > 0 ? <> Selected {images.length} images </> : null}
                 <button>Send</button>
             </form>
         </RoundedBox>
