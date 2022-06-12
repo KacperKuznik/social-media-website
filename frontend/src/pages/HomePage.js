@@ -7,7 +7,7 @@ function HomePage() {
   const [homePosts, setHomePosts] = useState([])
   useEffect(() => {
     axios.get('/posts/home').then((res) =>{
-      setHomePosts(res.data);
+      setHomePosts(res.data.reverse());
       console.table(res.data)
     })
   }, [])
@@ -17,7 +17,7 @@ function HomePage() {
   return (
     <div>
       <Navbar />
-      <PostList posts={homePosts}/>
+      <PostList showCreatePost={true} posts={homePosts}/>
     </div>
   );
 }

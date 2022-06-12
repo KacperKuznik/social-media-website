@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from users.serializers import UserSerializer 
 
 
 
@@ -12,7 +13,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     image_set = ImageSerializer(many=True)
-
+    creator = UserSerializer()
     class Meta:
         model = Post
         fields = ['id', 'text', 'likes', 'time', 'creator', 'image_set']

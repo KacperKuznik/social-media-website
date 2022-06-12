@@ -8,7 +8,7 @@ import UserDetailsContext from "../../context/UserDetailsContext";
 
 function LoginForm() {
     const navigate = useNavigate();
-    const { user, setUser } = useContext(UserDetailsContext)
+    const { setUser } = useContext(UserDetailsContext)
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [ErrorMessage, setErrorMessage] = useState("")

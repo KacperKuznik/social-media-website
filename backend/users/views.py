@@ -48,10 +48,12 @@ def signup_view(request):
 
             username = data.get('username')
             password = data.get('password')
+            first_name = data.get('first_name')
+            last_name = data.get('first_name')
             email = data.get('email')
 
             User.objects.create_user(
-                username=username, password=password, email=email)
+                username=username, password=password, first_name=first_name, last_name=last_name, email=email)
             user = authenticate(username=username, password=password)
             login(request, user)
             serialized_user = UserSerializer(user).data

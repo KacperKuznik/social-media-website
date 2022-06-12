@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/navbar/Navbar"
 import DisplayProfile from "../components/profile/DisplayProfile"
 import {useParams} from "react-router-dom"
