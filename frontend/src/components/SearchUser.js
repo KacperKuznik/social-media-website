@@ -15,9 +15,8 @@ const SearchUser = () => {
     }
     return(
         <form onSubmit={(e) => search(e)}>
-
-            <input list='searchlist' value={searchedUser} onChange={(e) => setSearchedUser(e.target.value)}></input>
-            <datalist id="searchlist">
+            <input  list='searchlist' value={searchedUser} onChange={(e) => setSearchedUser(e.target.value)}></input>
+            <datalist  id="searchlist">
                 {users ? users.map(user => 
                     <option key={user.id} value={user.username} />) : null}   
             </datalist>

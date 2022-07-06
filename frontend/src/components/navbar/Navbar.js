@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import AuthenticationButtons from '../auth/AuthenticationButtons';
 import Logout from '../auth/Logout';
 import {Link} from 'react-router-dom'
 import UserDetailsContext from '../../context/UserDetailsContext'
 import './Navbar.css'
 import Notifications from './Notifications'
-
+import SearchUser from '../SearchUser';
 
 
 function Navbar() {
@@ -19,6 +19,7 @@ function Navbar() {
           {user? <>
             <Link to={'/profile/'+user?.username} >profile</Link>
             <Link to='/messages'>messages</Link>
+            <SearchUser />
           </>
           : null}
 

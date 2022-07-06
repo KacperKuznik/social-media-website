@@ -33,9 +33,8 @@ function CreatePost(props){
     }
     return (
         <RoundedBox>
-            {console.log(user)}
             <PostSender {...user}/>
-            <br></br>
+            <p>Create new post</p>
             <form onSubmit={(e) => createNewPost(e)} style={{display: "flex"}}>
                 <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder='Create new post'></input>
                 <UploadImages setImages={(files) => setImages([...images, ...files])}/>

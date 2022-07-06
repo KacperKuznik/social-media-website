@@ -31,7 +31,7 @@ function ChangeAvatar() {
     <div>
         
         <label>
-            <img src={changeAvatar} className='change-avatar'/>
+            <img src={changeAvatar} alt="change avatar" className='change-avatar'/>
             <input type='file' id='avatar-input' accept=".png, .jpg" onChange={(e) => upload(e.target.files[0]) }></input>
         </label>
     </div>

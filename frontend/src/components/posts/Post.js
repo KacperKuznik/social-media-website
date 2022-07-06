@@ -14,11 +14,11 @@ function Post(props){
     return (
         <RoundedBox  className='post'>
             <div className='post'>
+                {visitedUser?.id === user?.id && <DeletePost id={props.post.id} onDelete={() => props.onDelete(props.id)}/>}
                 <PostSender {...props.post.creator}/>
                 <PostData post={props.post} />
                 {/* 
                 <PostComment /> */}
-                {visitedUser?.id === user?.id && <DeletePost id={props.post.id} onDelete={() => props.onDelete(props.id)}/>}
                 <hr></hr>
                 <PostActionButtons {...props.post}/>
             </div>

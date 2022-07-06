@@ -14,6 +14,7 @@ import SearchUserRoom from './pages/SearchUserRoom';
 import LandingPage from './pages/LandingPage';
 import UserDetailsContext from './context/UserDetailsContext'
 import { useState } from 'react';
+import './style/icons.css'
 
 function App() {
   const [user, setUser] = useState('')
