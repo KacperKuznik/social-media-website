@@ -6,8 +6,8 @@ import {useContext} from 'react'
 function Avatar(){
     const {user} = useContext(UserDetailsContext)
     const visitedUser = useContext(VisitedUserDetailsContext)
-    return(<div> 
-        <img src={visitedUser?.avatar} id="profile-picture" alt="profile picture"/>
+    return(<div className="profile-picture">
+        <img src={visitedUser?.avatar} alt="profile"/>
         {visitedUser?.id === user?.id ? <ChangeAvatar /> : null}
     </div>)
 }

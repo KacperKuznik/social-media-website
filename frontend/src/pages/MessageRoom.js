@@ -8,7 +8,6 @@ import FriendsList from "../components/FriendsList";
 const chatStyles = {
       "display": "flex",
       "flexGrow": "1",
-
 }
 function MessageRoom() {
     const room = useParams()

@@ -2,8 +2,31 @@
     overflow: hidden;
     clip-path: circle();
     height: 70px;
+    position: relative
 }
 .friend{
     display: flex;
     align-items: center;
+    margin: 5px
+}
+.friend:hover{
+    background-color: #ececec;
+}
+.friend-avatar{
+    position: relative;
+}
+.online-status{
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+
+}
+.active{
+    background-color: green;
+}
+.not-active{
+    background-color: gray;
 }

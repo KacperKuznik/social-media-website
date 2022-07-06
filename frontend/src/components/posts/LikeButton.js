@@ -15,7 +15,7 @@ const LikeButton = props =>{
     return(
         <span onClick={() => like()}>
             {likes}
-            <img src={likeIcon} />
+            <img src={likeIcon} alt='like icon' />
             Like
         </span>
     )
