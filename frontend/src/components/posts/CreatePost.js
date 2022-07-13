@@ -27,7 +27,6 @@ function CreatePost(props){
         await axios.post('/posts/create/', data, config)
         .then(res => {
             props.onCreatePost(res.data);
-            console.log(res.data);
         })
         
     }

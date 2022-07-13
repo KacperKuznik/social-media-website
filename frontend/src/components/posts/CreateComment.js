@@ -1,10 +1,12 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import comment from '../../img/comment.png'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import UserDetailsContext from '../../context/UserDetailsContext';
 
 function CreateComment(props){
     const [message, setMessage ] = useState("")
+    const {user} = useContext(UserDetailsContext)
+
 
     async function postComment(){
         let body = {
@@ -25,9 +27,12 @@ function CreateComment(props){
 
     return(
         <span>
-            <img src={comment} alt="comment" onClick={postComment}/>
-            Comment
-            <input value={message} onChange={(e) => setMessage(e.target.value)} />
+            <input value={message} placeholder="create comment" onChange={(e) => setMessage(e.target.value)} onKeyPress={event => {
+                if (event.key === 'Enter') {
+                  postComment()
+                }
+              }}/>
+            
         </span>
     )
 }

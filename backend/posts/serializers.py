@@ -10,6 +10,7 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = ['image']
 
 class CommentSerializer(serializers.ModelSerializer):
+    creator = UserSerializer()
     class Meta:
         model = Comment
         fields = "__all__"
@@ -20,5 +21,5 @@ class PostSerializer(serializers.ModelSerializer):
     creator = UserSerializer()
     class Meta:
         model = Post
-        fields = ['id', 'text', 'likes', 'time', 'creator', 'image_set', 'comment_set']
+        fields = ['id', 'text', 'likes', 'liked_by', 'time', 'creator', 'image_set', 'comment_set']
     

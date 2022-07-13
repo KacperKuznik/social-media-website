@@ -27,8 +27,8 @@ def like(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.like(request.user)
     post.save()
-
-    return JsonResponse({"likes": post.likes})
+    serialized_post = PostSerializer(post).data
+    return JsonResponse({"likes": serialized_post["likes"], "liked_by": serialized_post["liked_by"]})
 
 
 def create_post(request):
