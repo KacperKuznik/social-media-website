@@ -25,7 +25,7 @@ function PostActionButtons(props){
                     <div key={comment.id}>
                         <div style={{"height": "50px"}}>
                             <Link to={'/profile/'+comment.creator.username}>
-                                <img src={comment.creator.avatar} className="avatar"/>
+                                <img src={comment.creator.avatar} className="avatar" alt='avatar'/>
                                 {comment.creator.first_name} {comment.creator.last_name}
                             </Link>
                         </div>
