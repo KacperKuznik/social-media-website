@@ -23,7 +23,8 @@ class Post(models.Model):
 
 class Comment(models.Model):
     creator = models.ForeignKey(User, related_name='comment_creator',on_delete=models.CASCADE)
-    post = models.ForeignKey(Post,  related_name='post',on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    text = models.TextField(default="")
     #likes = models.IntegerField(default=0)
 
 class Image(models.Model):

@@ -27,14 +27,12 @@ function CreatePost(props){
         await axios.post('/posts/create/', data, config)
         .then(res => {
             props.onCreatePost(res.data);
-            console.log(res.data);
         })
         
     }
     return (
         <RoundedBox>
             <PostSender {...user}/>
-            <p>Create new post</p>
             <form onSubmit={(e) => createNewPost(e)} style={{display: "flex"}}>
                 <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder='Create new post'></input>
                 <UploadImages setImages={(files) => setImages([...images, ...files])}/>

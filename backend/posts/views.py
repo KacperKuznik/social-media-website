@@ -4,7 +4,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.http import HttpResponse, JsonResponse
 from requests import Response
 from .serializers import ImageSerializer, PostSerializer
-from .models import Post, Image
+from .models import Post, Image, Comment
 from django.views import generic
 from rest_framework import viewsets
 from users.models import User
@@ -27,8 +27,8 @@ def like(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.like(request.user)
     post.save()
-
-    return JsonResponse({"likes": post.likes})
+    serialized_post = PostSerializer(post).data
+    return JsonResponse({"likes": serialized_post["likes"], "liked_by": serialized_post["liked_by"]})
 
 
 def create_post(request):
@@ -55,3 +55,11 @@ def get_home_posts(request):
 
     serialized_posts = PostSerializer(posts, many=True).data
     return JsonResponse(serialized_posts, safe=False)
+
+def comment(request, post_id):
+    data = json.loads(request.body)
+    text = data["message"]
+    user = request.user
+    post = get_object_or_404(Post, pk=post_id)
+    Comment.objects.create(creator=user, post=post, text=text)
+    return HttpResponse(status=201)

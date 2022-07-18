@@ -95,7 +95,6 @@ def change_background(request):
 
 
 def request_friend(request, username):
-    print(username)
     friend = get_object_or_404(User, username=username)
     request.user.toggle_friend_request(friend)
     return HttpResponse(status=200)
