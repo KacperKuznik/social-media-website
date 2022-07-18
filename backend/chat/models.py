@@ -7,6 +7,7 @@ from users.models import User
 
 class Room(models.Model):
     users = models.ManyToManyField(User)
+    name = models.CharField(max_length=25, default="")
     
 
 class Message(models.Model):

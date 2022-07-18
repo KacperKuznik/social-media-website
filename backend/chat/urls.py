@@ -5,4 +5,5 @@ from .views import *
 app_name = 'chat'
 urlpatterns = [
     path('messages/<int:room_id>/', get_messages, name='get_messages'),
+    path('rooms/', get_rooms, name='get_rooms'),
 ]

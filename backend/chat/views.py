@@ -18,3 +18,9 @@ def get_messages(request, room_id):
     serialized_messages = MessageSerializer(messages, many=True).data
 
     return JsonResponse(serialized_messages, safe=False)
+
+def get_rooms(request):
+    rooms = request.user.room_set.all()
+    serialized_rooms = RoomSerializer(rooms, many=True).data
+    return JsonResponse(serialized_rooms, safe=False)
+    
