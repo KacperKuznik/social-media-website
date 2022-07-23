@@ -9,8 +9,7 @@ import json
 
 
 def get_messages(request, room_id):
-    
-    messages = get_list_or_404(Message, room=room_id)
+    messages = Message.objects.filter(room= room_id)
 
     for i in range(len(messages)):
         if messages[i].sender != request.user:

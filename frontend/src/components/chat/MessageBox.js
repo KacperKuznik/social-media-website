@@ -49,6 +49,7 @@ function MessageBox(props) {
           <button onClick={sendMessage}>Send</button>
           {messages ?  <div>
             {messages.map(message => <div key={message.id}>
+              {message.id}
               <Messages message={message.message} isSender={props.user.id === message.sender} time={new Date(message.time)} seen_by={message.seen_by}/>
             </div>)}
           </div> :  null}
