@@ -1,0 +1,18 @@
+.chat-group-list{
+    width: 25%;
+    height: 100%;
+    background-color: aqua;
+}
+
+.chat-group-list > div{
+    width: 100%;
+    height: 80px;
+    background-color: bisque;
+    display: flex;
+    align-items: center;
+}
+
+.chat-group-list > div img {
+    width: 50px;
+    margin-left: 5%;
+}
